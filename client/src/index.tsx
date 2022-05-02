@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
+// import "dotenv/config";
 
 ReactDOM.render(
   <React.StrictMode>

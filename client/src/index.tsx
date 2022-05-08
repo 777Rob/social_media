@@ -5,8 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
 
-console.log(process.env.REACT_APP_MORALIS_APP_ID);
-
 ReactDOM.render(
   <React.StrictMode>
     <MoralisProvider

@@ -39,10 +39,14 @@ const LoginButton = () => {
   return (
     <div>
       <h1>Moralis Hello World!</h1>
-      <button onClick={login}>Moralis Metamask Login</button>
-      <button onClick={logOut} disabled={isAuthenticating}>
-        Logout
-      </button>
+      {!isAuthenticated && (
+        <button onClick={login}>Moralis Metamask Login</button>
+      )}
+      {isAuthenticated && (
+        <button onClick={logOut} disabled={isAuthenticating}>
+          Logout
+        </button>
+      )}
     </div>
   );
 };

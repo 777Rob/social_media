@@ -8,7 +8,7 @@ import { useMoralis } from "react-moralis";
  * @returns <Blockies> JSX Elemenet
  */
 
-function Blockie(props) {
+const Blockie = (props) => {
   const { account, isAuthenticated } = useMoralis();
   if (!props.address && (!account || !isAuthenticated))
     return <Skeleton height={50} circle mb="xl" />;
@@ -24,6 +24,6 @@ function Blockie(props) {
       {...props}
     />
   );
-}
+};
 
 export default Blockie;

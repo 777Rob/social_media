@@ -7,6 +7,7 @@ import Address from "../Address/Address";
 import { SelectOutlined } from "@ant-design/icons";
 import { getExplorer } from "../../helpers/networks";
 import { connectors } from "./config";
+
 const styles = {
   account: {
     height: "42px",
@@ -32,7 +33,7 @@ const styles = {
   },
 };
 
-function Account() {
+const Account = () => {
   const { authenticate, isAuthenticated, account, chainId, logout } =
     useMoralis();
   const [isModalVisible, setIsModalVisible] = useState(false);

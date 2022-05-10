@@ -17,7 +17,7 @@ const styles = {
   },
 };
 
-function Address(props) {
+const Address = (props) => {
   const { account, isAuthenticated } = useMoralis();
   const [address, setAddress] = useState();
   const [isClicked, setIsClicked] = useState(false);

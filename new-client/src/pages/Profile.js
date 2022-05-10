@@ -1,6 +1,7 @@
 import { useMoralis } from "react-moralis";
 import { Box, Text, Button } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import { CopyButton } from "web3uikit";
 
 const Profile = () => {
   const { Moralis, account } = useMoralis();
@@ -19,8 +20,8 @@ const Profile = () => {
       >
         <img
           src={
-            user.attributes.Banner
-              ? user.attributes.Banner
+            user.attributes.banner
+              ? user.attributes.banner
               : "https://www.developingngo.org/wp-content/uploads/2018/01/2560x1440-gray-solid-color-background.jpg"
           }
           style={{ width: "100%" }}
@@ -28,14 +29,20 @@ const Profile = () => {
 
         <img
           src={
-            !user.attributes.ProfileImage
+            !user.attributes.profileImage
               ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTn1JPdehlaYXeHrMK8G8G7_lMRLLr_FWlY6A7SfYTk4py7lpUV5DgqKvsGNaOyPtDc8w&usqp=CAU"
-              : user.attributes.ProfileImage
+              : user.attributes.profileImage
           }
           style={{ width: "50px", height: "50px", borderRadius: "50%" }}
         />
         <Text>{user.attributes.userName}</Text>
-        <Text>{account}</Text>
+        <Text>
+          {account}
+          <CopyButton text={account} revertIn={6500} />
+        </Text>
+        <Text>
+          {user.attributes.bio}
+        </Text>
       </Box>
       <Button
         onClick={() => {

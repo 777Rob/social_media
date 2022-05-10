@@ -10,7 +10,6 @@ const loadPublications = async (Moralis, account) => {
 
     const results = await query.find();
 
-    setTweetArr(results);
     console.log(results);
 
     return { loading, publications, error };

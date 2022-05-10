@@ -4,12 +4,11 @@ import { TextField, Stack } from "@mui/material";
 import { useMoralis } from "react-moralis";
 import { Blockie, TextArea } from "web3uikit";
 import { clampUseMovePosition } from "@mantine/hooks";
-import { defaultImages } from "../helpers/defaultImages";
+import { defaultImages } from "data/defaultProfileImages";
 
 const Home = () => {
-  const { Moralis, account, user } = useMoralis();
+  const { Moralis, user } = useMoralis();
   const Publications = Moralis.Object.extend("Publications");
-  const User = Moralis.Object.extend("User");
 
   const [post, setPost] = useState({ text: "" });
   const [posts, setPosts] = useState([]);

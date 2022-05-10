@@ -1,17 +1,16 @@
-import React, { useEffect } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import Profile from "./pages/Profile";
-import ProfileEdit from "./pages/ProfileEdit";
-import Settings from "./pages/Settings";
-import { Grid } from "@mantine/core";
-import SideBar from "./components/SideBar";
-import SideBar2 from "./components/SideBar2";
+import { Box, Grid, Text } from "@mantine/core";
+import SideBar from "components/SideBarLeft";
+import SideBar2 from "components/SideBarRight";
+import AccountCreation from "pages/AccountCreation";
+import Home from "pages/Home";
+import Profile from "pages/Profile";
+import ProfileEdit from "pages/ProfileEdit";
+import Settings from "pages/Settings";
+import React from "react";
 import { useMoralis } from "react-moralis";
-import { Box, Text } from "@mantine/core";
+import { Route, Routes } from "react-router-dom";
 import { ConnectButton } from "web3uikit";
+import "./App.css";
 
 const App = () => {
   const { isAuthenticated } = useMoralis();
@@ -36,19 +35,20 @@ const App = () => {
     );
   }
   return (
-    <Grid>
-      <Grid.Col span={3}>
+    <Grid columns={9} justify="center">
+      <Grid.Col span={2}>
         <SideBar />
       </Grid.Col>
-      <Grid.Col span={6}>
+      <Grid.Col span={4}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/AccountCreation" element={<AccountCreation />} />
         </Routes>
       </Grid.Col>
-      <Grid.Col span={3}>
+      <Grid.Col span={2}>
         <SideBar2 />
       </Grid.Col>
     </Grid>

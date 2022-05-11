@@ -3,9 +3,7 @@ import { Box, Text } from "@mantine/core";
 
 const Rewards = () => {
     return ( <div style={{ display: 'grid', gap: '10px', padding: '20px 10px' }}>
-        <Text sx={{fontSize: "24px", fontWeight: "bold"}}>
-        Rewards
-        </Text>
+
     <section style={{ display: 'flex', gap: '20px' }}>
         <Widget info="Polygon mainet" title="Block Chain" />
         <Widget info="233" title="Number of Ads received" />

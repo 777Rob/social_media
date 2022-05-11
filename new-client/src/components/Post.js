@@ -1,30 +1,23 @@
-import { Box, Text, Image } from "@mantine/core";
+import { Box,Card, Text, Image, useMantineTheme } from "@mantine/core";
 import { defaultImages } from "data/defaultProfileImages";
+import Avatar from "components/Avatar";
 
 export default function Post({ post }) {
+  const theme = useMantineTheme();
+
   return (
-    <Box
+    <Card
       className="post"
       sx={{
         borderRadius: "10px",
-        backgroundColor: "#eee",
-        maxWidth: "100%",
         borderBottom: "1px solid #dadada",
         padding: "25px",
         justifyContent: "space-between",
         marginTop: "10px",
       }}
     >
-      <Image
-        width={50}
-        height={50}
-        radius="50%"
-        src={
-          post.attributes.userProfilePic
-            ? post.attributes.userProfilePic
-            : defaultImages[0]
-        }
-      />
+      <Avatar userId={post.attributes.User} />
+
       <Box
         sx={{
           display: "flex",
@@ -35,7 +28,7 @@ export default function Post({ post }) {
         }}
       >
         <Text sx={{ fontWeight: "bold", fontSize: "24px" }}>
-          {post.attributes.User}
+          {post.attributes.User.userName}
         </Text>
         <Text sx={{ fontWeight: "bold", fontSize: "24px" }}>
           {post.attributes.createdAt.toLocaleString("en-us", {
@@ -46,6 +39,6 @@ export default function Post({ post }) {
           })}
         </Text>
       </Box>
-    </Box>
+    </Card>
   );
 }

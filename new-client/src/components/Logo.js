@@ -1,4 +1,5 @@
 const Logo = ({ width, height, sx }) => {
+  //
   return (
     <svg
       style={sx}

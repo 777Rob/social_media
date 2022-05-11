@@ -8,7 +8,7 @@ import { SiAzuredataexplorer } from "react-icons/si";
 import { MdNotifications } from "react-icons/md";
 import { TiSocialTwitter } from "react-icons/ti";
 import { Container } from "@mantine/core";
-import Logo from "../data/Logo";
+import Logo from "components/Logo";
 
 // @TODO: Change Icons maybe use web3uikit
 const Navigation = [
@@ -28,8 +28,8 @@ const Navigation = [
     icon: <FiSettings />,
   },
   {
-    name: "Explore",
-    path: "/Explore",
+    name: "Rewards",
+    path: "/Rewards",
     icon: <SiAzuredataexplorer />,
   },
   {
@@ -45,22 +45,28 @@ const Navigation = [
 ];
 
 const Styles = {
-  logo: { fontSize: "40px", display: "flex", alignItems: "center" },
-  navLink: {
-    fontSize: "30px",
-    height: "60px",
+  logo: {
+    fontSize: "40px",
     display: "flex",
-    padding: "15px",
-    justifyContent: "space-between",
-    margin: "5px",
+    alignItems: "center",
+    marginLeft: "15px",
+    marginBottom: "10px",
   },
-  navText: { fontSize: "24px", padding: "3px" },
+  navLink: {
+    fontSize: "22px",
+    height: "37px",
+    display: "flex",
+    padding: "5px",
+    justifyContent: "space-between",
+    margin: "3px",
+  },
+  navText: { fontSize: "20px", padding: "3px" },
 };
 
 const SideBar = () => {
   const navigate = useNavigate();
   return (
-    <Box sx={{ position: "fixed", width: "20%" }}>
+    <Box sx={{ position: "fixed", width: "20%", marginTop: "10px" }}>
       <Text sx={Styles.logo}>
         <Logo sx={{ padding: "5px" }} width="50px" height="50px" />
         <Text

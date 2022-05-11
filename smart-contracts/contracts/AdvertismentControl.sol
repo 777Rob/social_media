@@ -1,6 +1,7 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.1;
 import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "./UserAttentionToken.sol";
 
 contract AdvertismentControl is AccessControl {
@@ -14,6 +15,13 @@ contract AdvertismentControl is AccessControl {
 
   // Users that can create advertisments
   bytes32 public constant ADVERTISER_ROLE = keccak256("ADVERTISER_ROLE");
+  IERC20 userAttentionToken;
+
+  constructor(address _userAttentionTokenAddress) {
+    _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
+
+    userAttentionToken = IERC20(_userAttentionTokenAddress);
+  }
 
   // Advertisment
   struct Advertisment {
@@ -43,14 +51,6 @@ contract AdvertismentControl is AccessControl {
   uint256 activeAdCount = 0;
   uint256 advertiserCount = 0;
 
-  constructor(address _userAttentionTokenAddress) {
-    _setupRole(DEFAULT_ADMIN_ROLE, msg.sender);
-
-    UserAttentionToken userAttentionToken = UserAttentionToken(
-      _userAttentionTokenAddress
-    );
-  }
-
   // Approve an addvertiser profile
   function approveAddvertiser(address _advertiser)
     external
@@ -69,12 +69,8 @@ contract AdvertismentControl is AccessControl {
 
   // Check if user is supposed to see advertisement
   function userInTargets(uint256 id, address user) public view returns (bool) {
-    for (
-      uint256 i = 0;
-      i < advertisments[_advertismentID]["users"].length;
-      i++
-    ) {
-      if (advertisments[_advertismentID]["users"][i] == user) {
+    for (uint256 i = 0; i < advertisments[id].targets.length; i++) {
+      if (advertisments[id].targets[i] == user) {
         return true;
       }
     }
@@ -83,22 +79,23 @@ contract AdvertismentControl is AccessControl {
   }
 
   // Let advertiser to create advertisment
-  function createAdvertisment(address[] _reviewers, uint256 _rewardBalance)
-    public
-    onlyRole(ADVERTISER_ROLE)
-  {
+  function createAdvertisment(
+    address[] calldata _reviewers,
+    uint256 _rewardBalance,
+    address[] calldata _targets
+  ) public onlyRole(ADVERTISER_ROLE) {
     require(_rewardBalance > 0, "Reward balance must be greater than 0");
-    UserAttentionToken.transferFrom(msg.sender, address(this), _rewardBalance);
+    userAttentionToken.transferFrom(msg.sender, address(this), _rewardBalance);
     adCount++;
-    Advertisment advertisment = advertisments[adCount];
+    Advertisment memory advertisment = advertisments[adCount];
     advertisment.advertiser = msg.sender;
-    advertisment.users = [];
+    advertisment.targets = _targets;
     advertisment.rewardBalance = _rewardBalance;
     advertisment.active = false;
   }
 
   // Lets user to receive a reward after reading through advertisment
-  function claimAdvertisementReward(address _advertismentID) external {
+  function claimAdvertisementReward(uint256 _advertismentID) external {
     require(
       advertisments[_advertismentID].active,
       "Advertisment is not active"

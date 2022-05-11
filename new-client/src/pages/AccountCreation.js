@@ -1,30 +1,89 @@
-import { useMoralis } from "react-moralis";
-import { Text, BackgroundImage, Center, Grid, Checkbox } from "@mantine/core";
+import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
+import {
+  Text,
+  BackgroundImage,
+  Button,
+  Center,
+  Grid,
+  Checkbox,
+  Stepper,
+  Group,
+} from "@mantine/core";
 import { Categories } from "data/Categories/categories";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { MultiSelect } from "@mantine/core";
+import { PROFILE_CONTRACT_ABI } from "contracts/abis";
+import { PROFILE_CONTRACT_ADDRESS } from "contracts/addresses";
+import { DatePicker, Input, Form } from "web3uikit";
 
 const AccountCreation = () => {
   const { Moralis } = useMoralis();
   const user = Moralis.User.current();
-  const navigate = useNavigate();
-  const [categories, setCategories] = useState([]);
-  let error;
 
-  const updateCategories = () => {
-    if (categories.length < 2) {
-      error = "Please select at least 2 categories";
+  const [active, setActive] = useState(0);
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [error, setError] = "none";
+
+  let lensProfileID = 1;
+
+  const navigate = useNavigate();
+  const contractProcessor = useWeb3ExecuteFunction();
+
+  const nextStep = async () => {
+    console.log(active);
+    if (active === 4) {
+      console.log("Subbmiting contract interaction");
+      user.set("profileCompleted", true);
+      await user.save();
+
+      let options = {
+        address: PROFILE_CONTRACT_ADDRESS,
+        abi: PROFILE_CONTRACT_ABI,
+        functionName: "createProfile",
+        params: {
+          _interestCategories: selectedCategories,
+          _lensProfileID: lensProfileID,
+        },
+      };
+      await contractProcessor.fetch({
+        params: options,
+        onSuccess: () => {
+          navigate("/");
+        },
+        onError: (error) => {
+          setError(error.message);
+        },
+      });
     }
-    user.set("Categories", categories);
+    if (active === 0 && selectedCategories.length < 0) {
+      setError("Please select atleast 1 category");
+    } else if (active === 0 && selectedCategories.length > 0) {
+      setError("None");
+      user.set("interestCategories", selectedCategories);
+      await user.save();
+      setActive(active < 4 ? active + 1 : active);
+    } else {
+      setActive(active < 4 ? active + 1 : active);
+    }
   };
+
+  const prevStep = () =>
+    setActive((current) => (current > 0 ? current - 1 : current));
 
   return (
     <div>
       <Text sx={{ fontSize: "24px", fontWeight: "bold" }}>
         Account Creation
       </Text>
-      {/* <Grid>
+
+      <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+        <Stepper.Step
+          label="First step"
+          description="Select topic you are interested in"
+        >
+          Select topic you are interested in.
+          {/* <Grid>
         {Categories.map((category) => (
           <Grid.item span={3}>
             <BackgroundImage
@@ -44,21 +103,120 @@ const AccountCreation = () => {
           </Grid.item>
         ))}
       </Grid> */}
+          <MultiSelect
+            data={Categories.map((category, i) => ({
+              value: i,
+              label: (
+                <Text>
+                  {category.icon}
+                  {category.name}
+                </Text>
+              ),
+            }))}
+            value={selectedCategories}
+            onChange={setSelectedCategories}
+            label="Pick categories you would like to follow:"
+            placeholder="Pick all that you like"
+          />
+        </Stepper.Step>
+        <Stepper.Step label="Second step" description="Select your user name">
+          <Text
+            sx={{ fontWeight: "bold", fontSize: "18px", marginBottom: "20px" }}
+          >
+            Select your user name:
+          </Text>
+          <Input
+            label="User name"
+            name="User name"
+            prefixIcon="cube"
+            width="70%"
+          />
+        </Stepper.Step>
+        <Stepper.Step label="Third step" description="Complete profile">
+          <Text
+            sx={{ fontWeight: "bold", fontSize: "18px", marginBottom: "20px" }}
+          >
+            Complete profile information
+          </Text>
+          {/* <Input label="Website" name="Website" prefixIcon="cube" width="70%" />
+          <Input label="Bio" name="Bio" prefixIcon="cube" width="70%" />
+          <DatePicker
+            id="date-picker"
+            onChange={function noRefCheck() {}}
+          />{" "} */}
 
-      <MultiSelect
-        data={Categories.map((category) => ({
-          value: (
-            <Text>
-              {category.icon}
-              {category.name}
-            </Text>
-          ),
-          label: category.name,
-        }))}
-        
-        label="Pick categories you would like to follow:"
-        placeholder="Pick all that you like"
-      />
+          <Form
+            buttonConfig={{
+              onClick: function noRefCheck() {},
+              theme: "primary",
+            }}
+            data={[
+              {
+                inputWidth: "100%",
+                name: "First name",
+                type: "text",
+                value: "",
+              },
+              {
+                inputWidth: "100%",
+                name: "Last name",
+                type: "text",
+                value: "",
+              },
+              {
+                inputWidth: "100%",
+                name: "Email address",
+                type: "email",
+                validation: {
+                  regExp: "^[^@s]+@[^@s]+.[^@s]+$",
+                },
+                value: "",
+              },
+              {
+                name: "Birthday",
+                type: "date",
+                value: "Enter your birthday date",
+              },
+              {
+                inputWidth: "100%",
+                name: "Your Bio",
+                type: "textarea",
+                validation: {
+                  required: true,
+                },
+                value: "",
+              },
+            ]}
+            onSubmit={function noRefCheck() {}}
+            title="Your Profile"
+          />
+        </Stepper.Step>
+        <Stepper.Step
+          label="Fourth step"
+          description="Configure reward settings"
+        >
+          Offer user to opt-in for advertising of a products that user can be
+          intersested in and configure earning profile and select how many ads
+          user wants to receive if at all
+        </Stepper.Step>
+        <Stepper.Completed>
+          Completed, click back button to get to previous step
+        </Stepper.Completed>
+      </Stepper>
+
+      <Group position="apart" mt="xl">
+        <Button variant="default" onClick={prevStep}>
+          Back
+        </Button>
+        {error == !"none" && error}
+        <Button onClick={nextStep}>
+          {active != 4 ? (
+            <Text>Next step</Text>
+          ) : (
+            <Text>Complete and mint profile NFT</Text>
+          )}
+        </Button>
+      </Group>
     </div>
   );
 };

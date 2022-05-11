@@ -6,6 +6,7 @@ import Home from "pages/Home";
 import Profile from "pages/Profile";
 import ProfileEdit from "pages/ProfileEdit";
 import Settings from "pages/Settings";
+import Rewards from "pages/Rewards";
 import React from "react";
 import { useMoralis } from "react-moralis";
 import { Route, Routes } from "react-router-dom";
@@ -13,7 +14,7 @@ import { ConnectButton } from "web3uikit";
 import "./App.css";
 
 const App = () => {
-  const { isAuthenticated } = useMoralis();
+  const { isAuthenticated, user } = useMoralis();
   if (!isAuthenticated) {
     return (
       <Box
@@ -34,6 +35,9 @@ const App = () => {
       </Box>
     );
   }
+  if(!user.attributes.profileCompleted){
+    return <AccountCreation />
+  }
   return (
     <Grid columns={9} justify="center">
       <Grid.Col span={2}>
@@ -46,6 +50,7 @@ const App = () => {
           <Route path="/profile/edit" element={<ProfileEdit />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/AccountCreation" element={<AccountCreation />} />
+          <Route path="/Rewards" element={<Rewards/>} />
         </Routes>
       </Grid.Col>
       <Grid.Col span={2}>

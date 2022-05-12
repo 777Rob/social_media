@@ -1,14 +1,10 @@
 //SPDX-License-Identifier: MIT
-pragma solidity ^0.8.1;
+pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract UserProfile is ERC721 {
-  /**
-   * @dev The UserProfile contract
-   * This contract allows creation of user profiles with interest categories
-   */
-
+contract UserProfile is ERC721, Ownable {
   using Counters for Counters.Counter;
   Counters.Counter private _tokenIds;
 
@@ -45,14 +41,9 @@ contract UserProfile is ERC721 {
 
   // NFT ID => ProfileData
   mapping(uint256 => Profile) public profiles;
-  //   Address of an user => profile nft id
+  //   Address of an user => profile nft id 
   mapping(address => uint256) public userProfile;
 
-  /*
-   *@dev Creation of a new user profile
-   *@param _interestCategories The user interest categories
-   *@param _lensProfileID The lens profile id
-   */
   function createProfile(
     uint256[] calldata _interestCategories,
     uint256 _lensProfileID
@@ -64,34 +55,29 @@ contract UserProfile is ERC721 {
       _mint(msg.sender, newProfileId);
 
       // Link the profile nft to the data
-      Profile memory newProfile;
+      Profile memory newProfile ;
       newProfile.id = newProfileId;
-      newProfile.user = msg.sender;
+        newProfile.user = msg.sender;
       newProfile.interestCategories = _interestCategories;
       newProfile.reputation = 0;
       newProfile.lensProfileID = _lensProfileID;
       userProfile[msg.sender] = newProfileId;
-      profiles[newProfileId] = newProfile;
-      // Increment tokenId counter
+        profiles[newProfileId] = newProfile;
+     // Increment tokenId counter
       _tokenIds.increment();
-
+      
       return newProfileId;
     }
     return 0;
   }
 
-  //  @dev Get the user profile
-  //  @param _id the id of profile nft to get data of
-  function getProfileData(uint256 _id) external view returns (Profile memory) {
-    return profiles[_id];
+  function getProfileData(uint256 id) external view returns(Profile memory){
+      return profiles[id];
   }
 
-  // @dev set interest categories for the user
-  // @param _newCategories categories to set
-  function setInterestCategories(uint256[] calldata _newCategories) external {
-    require(_newCategories.length <= 256, "Too many categories");
-    require(_newCategories.length >= 1, "Choose atleast 1 category");
-    uint256 userProfileId = userProfile[msg.sender];
-    profiles[userProfileId].interestCategories = _newCategories;
-  }
+// @Dev
+    function setInterestCategories(uint256[] calldata newCategories) external{
+        uint256 userProfileId = userProfile[msg.sender];
+        profiles[userProfileId].interestCategories = newCategories;
+    }
 }

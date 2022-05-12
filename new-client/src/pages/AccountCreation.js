@@ -20,41 +20,45 @@ import { DatePicker, Input, Form } from "web3uikit";
 const AccountCreation = () => {
   const { Moralis } = useMoralis();
   const user = Moralis.User.current();
-
   const [active, setActive] = useState(0);
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [error, setError] = "none";
-
-  let lensProfileID = 1;
+  const [error, setError] = useState("none");
+  const contractProcessor = useWeb3ExecuteFunction();
 
   const navigate = useNavigate();
-  const contractProcessor = useWeb3ExecuteFunction();
+
+  const mintProfile = async () => {
+    let options = {
+      contractAddress: "0x5b4Eedf2d9290676E2b92BE945fA837Ff69D9745",
+      abi: PROFILE_CONTRACT_ABI,
+      functionName: "createProfile",
+      params: {
+        _interestCategories: selectedCategories,
+        _lensProfileID: 3,
+      },
+      msgValue: Moralis.Units.ETH(0),
+    };
+
+    await contractProcessor.fetch({
+      params: options,
+      onSuccess: async () => {
+        console.log("SUCCESS");
+        user.set("profileCompleted", true);
+        await user.save();
+        navigate("/Welcome");
+      },
+      onError: (error) => {
+        setError(error.data.message);
+        console.log(error.data.message);
+      },
+    });
+  };
 
   const nextStep = async () => {
     console.log(active);
     if (active === 4) {
       console.log("Subbmiting contract interaction");
-      user.set("profileCompleted", true);
-      await user.save();
-
-      let options = {
-        address: PROFILE_CONTRACT_ADDRESS,
-        abi: PROFILE_CONTRACT_ABI,
-        functionName: "createProfile",
-        params: {
-          _interestCategories: selectedCategories,
-          _lensProfileID: lensProfileID,
-        },
-      };
-      await contractProcessor.fetch({
-        params: options,
-        onSuccess: () => {
-          navigate("/");
-        },
-        onError: (error) => {
-          setError(error.message);
-        },
-      });
+      mintProfile();
     }
     if (active === 0 && selectedCategories.length < 0) {
       alert("Please select atleast 1 category");

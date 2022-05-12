@@ -5,7 +5,9 @@ import {
   ColorSchemeProvider,
   Group,
   Header,
-  MantineProvider, Text, useMantineTheme
+  MantineProvider,
+  Text,
+  useMantineTheme,
 } from "@mantine/core";
 import { LogoText } from "data/Logo";
 import { Navigation } from "data/Navigation";
@@ -14,6 +16,7 @@ import Home from "pages/Home";
 import Profile from "pages/Profile";
 import ProfileEdit from "pages/ProfileEdit";
 import Rewards from "pages/Rewards";
+import Communities from "pages/Communities";
 import Settings from "pages/Settings";
 import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
@@ -27,8 +30,10 @@ import { theme } from "./theme";
 const HeaderComponent = ({ toggleColorScheme, colorScheme }) => {
   const theme = useMantineTheme();
   const locationObject = useLocation();
-  const locationName = Navigation.filter(item => locationObject.pathname == item.path)[0].name
-  console.log(locationName)
+  const locationName = Navigation.filter(
+    (item) => locationObject.pathname == item.path
+  )[0].name;
+  console.log(locationName);
   return (
     <Header height={60} p="xs" fixed={true}>
       <Group sx={{ height: "100%" }} px={10} position="apart">
@@ -77,14 +82,13 @@ const App = () => {
   if (!user.attributes.profileCompleted) {
     return <AccountCreation />;
   }
-
   return (
     <ColorSchemeProvider
       colorScheme={colorScheme}
       toggleColorScheme={toggleColorScheme}
     >
       <MantineProvider
-        theme={{ ...theme, colorScheme:colorScheme }}
+        theme={{ ...theme, colorScheme: colorScheme }}
         withGlobalStyles
         withNormalizeCSS
       >
@@ -115,6 +119,7 @@ const App = () => {
               <Route path="/settings" element={<Settings />} />
               <Route path="/AccountCreation" element={<AccountCreation />} />
               <Route path="/Rewards" element={<Rewards />} />
+              <Route path="/Communities" element={<Communities />} />
             </Routes>
           </Box>
         </AppShell>

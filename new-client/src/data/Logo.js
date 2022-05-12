@@ -1,13 +1,18 @@
-const Logo = ({ width, height, sx }) => {
+import { Text, useMantineTheme } from "@mantine/core";
+import { useNavigate } from "react-router-dom";
+
+export const Logo = ({ size, sx }) => {
   //
+  const theme = useMantineTheme();
+
   return (
     <svg
       style={sx}
       xmlns="http://www.w3.org/2000/svg"
-      width={width ? width : "500"}
+      width={size ? size : "500"}
       zoomAndPan="magnify"
       viewBox="0 0 375 374.999991"
-      height={height ? height : "500"}
+      height={size ? size : "500"}
       preserveAspectRatio="xMidYMid meet"
       version="1.0"
     >
@@ -201,4 +206,23 @@ const Logo = ({ width, height, sx }) => {
   );
 };
 
-export default Logo;
+export const LogoText = ({ size, sx }) => {
+  const navigate = useNavigate();
+  const theme = useMantineTheme();
+console.log(theme)
+  return (
+    <Text
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        fontWeight: "bold",
+        fontSize: "25px",
+        color: theme.colorScheme == "light" ? theme.colors.dark[7] : theme.colors.indigo[1]
+      }}
+      onClick={() => navigate("/")}
+    >
+      <Logo size={size || "45px"} />
+      Parsedia
+    </Text>
+  );
+};

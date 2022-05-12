@@ -39,7 +39,6 @@ const Home = () => {
   // Render a section to write a post followed by a list of posts
   return (
     <Box>
-      <Text sx={{ fontWeight: "bold", fontSize: "24px" }}>Home</Text>
       <WritePost user={user} post={post}/>
       {posts.map((post) => (
         <Post post={post} />

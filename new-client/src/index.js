@@ -1,13 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
-import { MantineProvider } from "@mantine/core";
-import { theme } from "./theme";
 import { NotificationProvider } from "web3uikit";
-import { BrowserRouter } from "react-router-dom";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,11 +16,11 @@ ReactDOM.render(
       appId="LA7Ekr7CCjfrhiCh7RILn1pY5F86U64lwUijjJ38"
     >
       <NotificationProvider>
-        <MantineProvider theme={theme} withGlobalStyles withNormalizeCSS>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </MantineProvider>
+      <BrowserRouter>
+
+        <App />
+        </BrowserRouter>
+
       </NotificationProvider>
     </MoralisProvider>
   </React.StrictMode>,

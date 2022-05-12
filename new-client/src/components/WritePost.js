@@ -1,12 +1,20 @@
-import { Container } from "@mantine/core";
-import { Image, Box, Button, Space } from "@mantine/core";
-import { TextArea } from "web3uikit";
+import {
+  Image,
+  Box,
+  Button,
+  Container,
+  Space,
+  useMantineTheme,
+  Textarea,
+} from "@mantine/core";
 import { defaultImages } from "data/defaultProfileImages";
 import { useMoralis } from "react-moralis";
 import { useState } from "react";
+import Avatar from "components/Avatar";
 
 export default function WritePost() {
   const { Moralis, user, account } = useMoralis();
+  const theme = useMantineTheme();
 
   const [post, setPost] = useState({ text: "", image: "" });
 
@@ -21,36 +29,34 @@ export default function WritePost() {
   };
 
   return (
-    <Container>
-      <Box sx={{ display: "flex" }}>
-        <Image
-          alt={account}
-          src={
-            user.attributes.ProfilePicture
-              ? user.attributes.ProfilePicture
-              : defaultImages[0]
-          }
-          style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-        />
-        <Space w="md" />
-        <TextArea
-          type="text"
-          width="95%"
-          value={post.text}
-          onChange={(e) => {
-            setPost({ ...post, text: e.target.value });
-          }}
-          sx={{ minHeight: "200px" }}
-          label="What's on your mind?"
-        />
-      </Box>
+    <Container sx={{display: "flex", flexDirection: "column"}}>
+      <Textarea
+        style={{ width: "100%", marginTop: "10px" }}
+        placeholder="What's on your mind today?"
+        variant="filled"
+        icon={<Avatar />}
+        radius="md"
+        minRows={4}
+        maxRows={8}
+        size="xl"
+        autosize
+        width="100%"
+        value={post.text}
+        onChange={(e) => {
+          setPost({ ...post, text: e.target.value });
+        }}
+      />
+
       <Button
         radius="md"
+        variant="gradient"
+        gradient={{ from: "indigo", to: "cyan" }}
+        sx={{width: "200px", marginLeft: "auto", marginRight: "0px", marginTop: "10px"}}
         onClick={() => {
           handlePost();
         }}
       >
-        Post
+        Post to the feed.
       </Button>
     </Container>
   );

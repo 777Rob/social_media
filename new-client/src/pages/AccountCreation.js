@@ -57,14 +57,13 @@ const AccountCreation = () => {
       });
     }
     if (active === 0 && selectedCategories.length < 0) {
-      setError("Please select atleast 1 category");
+      alert("Please select atleast 1 category");
     } else if (active === 0 && selectedCategories.length > 0) {
-      setError("None");
       user.set("interestCategories", selectedCategories);
       await user.save();
-      setActive(active < 4 ? active + 1 : active);
+      setActive(active + 1);
     } else {
-      setActive(active < 4 ? active + 1 : active);
+      setActive(active + 1);
     }
   };
 

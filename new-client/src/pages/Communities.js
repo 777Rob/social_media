@@ -95,14 +95,14 @@ const Communities = () => {
       <Divider my="xs" />
 
       <Text sx={{ fontSize: "20px", marginBottom: "25px" }}>
-        Communities is a way to communicate for people owning NFTs from the same
-        collection. For the NFT's already deployed on chain communities are
-        generated automatically by owning NFT from the collection you are
-        automatically eligable to join. You can create your own community by
-        simply minting NFT collection or through our website. When creating
-        community through our website you can create fully-customisable
-        subscription based communities where you can share content and earn
-        revenue.
+        Communities enable communication and collaboration for owners of NFTs
+        from the same collection. For the NFT's already deployed on chain
+        communities are generated automatically by owning NFT from the
+        collection you are automatically eligable to join. You can create your
+        own community by simply minting NFT collection or through our website.
+        When creating community through our website you can create
+        fully-customisable subscription based communities where you can share
+        content and earn revenue.
       </Text>
       <Text sx={{ fontSize: "30px", fontWeight: "500" }} align="center">
         Your Communities
@@ -163,6 +163,10 @@ const Communities = () => {
             )
         )}
       </Grid>
+      <Text align="center" sx={{ fontSize: "30px", fontWeight: "500" }}>
+        Explore communities based on your interests
+      </Text>
+      <Divider my="xs" />
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Box,Card, Text, Image, useMantineTheme } from "@mantine/core";
+import { Box,Card, Text, Image, useMantineTheme, Grid, Container } from "@mantine/core";
 import { defaultImages } from "data/defaultProfileImages";
 import Avatar from "components/Avatar";
 
@@ -13,32 +13,52 @@ export default function Post({ post }) {
         borderBottom: "1px solid #dadada",
         padding: "25px",
         justifyContent: "space-between",
-        marginTop: "10px",
+        margin: "20px",
+        marginRight: "40px",
+        marginLeft: "40px"
       }}
     >
-      <Avatar userId={post.attributes.User} />
+      {/* Post structure */}
+      <Grid>
 
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "start",
-          flexDirection: "column",
-          gap: "15px",
-          width: "85%",
-        }}
-      >
-        <Text sx={{ fontWeight: "bold", fontSize: "24px" }}>
-          {post.attributes.User.userName}
-        </Text>
-        <Text sx={{ fontWeight: "bold", fontSize: "24px" }}>
-          {post.attributes.createdAt.toLocaleString("en-us", {
-            month: "short",
-          })}
-          {post.attributes.createdAt.toLocaleString("en-us", {
-            day: "numeric",
-          })}
-        </Text>
-      </Box>
+        {/* First row is of size 12 (the maximum is 12) and consists of the user's avatar and username */}
+        <Grid.Col span={12} sx={{display: "flex", alignItems: "center"}}>
+
+            <Avatar userId={post.attributes.User} />
+            <Text size="md" weight={500} style={{ marginLeft: "5px" }}>
+              User id: {post.attributes.userId}
+            </Text>
+
+        </Grid.Col>
+
+        {/* Second row contains post text */}
+        <Grid.Col span={12}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            flexDirection: "column",
+            gap: "15px",
+            width: "85%",
+          }}
+        >
+          <Text size="md">
+            {post.attributes.Text}
+          </Text>
+        </Box>
+        </Grid.Col>
+
+        {/* Third row contains post date */}
+        <Grid.Col span={12}>
+          <Text size="sm" color="Gray">
+            {post.attributes.createdAt.toLocaleString("en-GB", {
+              dateStyle: "medium",
+              timeStyle: "medium",
+              hour12: false,
+            })}
+          </Text>
+        </Grid.Col>
+      </Grid>
     </Card>
   );
 }

@@ -41,7 +41,7 @@ contract UserProfile is ERC721, Ownable {
 
   // NFT ID => ProfileData
   mapping(uint256 => Profile) public profiles;
-  //   Address of an user => profile nft id 
+  //   Address of an user => profile nft id
   mapping(address => uint256) public userProfile;
 
   function createProfile(
@@ -55,29 +55,29 @@ contract UserProfile is ERC721, Ownable {
       _mint(msg.sender, newProfileId);
 
       // Link the profile nft to the data
-      Profile memory newProfile ;
+      Profile memory newProfile;
       newProfile.id = newProfileId;
-        newProfile.user = msg.sender;
+      newProfile.user = msg.sender;
       newProfile.interestCategories = _interestCategories;
       newProfile.reputation = 0;
       newProfile.lensProfileID = _lensProfileID;
       userProfile[msg.sender] = newProfileId;
-        profiles[newProfileId] = newProfile;
-     // Increment tokenId counter
+      profiles[newProfileId] = newProfile;
+      // Increment tokenId counter
       _tokenIds.increment();
-      
+
       return newProfileId;
     }
     return 0;
   }
 
-  function getProfileData(uint256 id) external view returns(Profile memory){
-      return profiles[id];
+  function getProfileData(uint256 id) external view returns (Profile memory) {
+    return profiles[id];
   }
 
-// @Dev
-    function setInterestCategories(uint256[] calldata newCategories) external{
-        uint256 userProfileId = userProfile[msg.sender];
-        profiles[userProfileId].interestCategories = newCategories;
-    }
+  // @Dev
+  function setInterestCategories(uint256[] calldata newCategories) external {
+    uint256 userProfileId = userProfile[msg.sender];
+    profiles[userProfileId].interestCategories = newCategories;
+  }
 }

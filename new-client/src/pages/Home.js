@@ -23,8 +23,7 @@ const Home = () => {
         const query = new Moralis.Query(Publications);
         const results = await query.find();
 
-        setPosts(results.map((result) => result));
-        console.log(results);
+        setPosts(results);
         setLoaded(true);
       } catch (error) {
         console.error(error);

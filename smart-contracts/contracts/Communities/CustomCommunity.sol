@@ -9,7 +9,9 @@ contract MyCommunity is ERC721, Ownable {
 
   Counters.Counter private _tokenIdCounter;
 
-  constructor(string _name, string _ticker) ERC721(_name, _ticker) {}
+  constructor(string memory _name, string memory _ticker)
+    ERC721(_name, _ticker)
+  {}
 
   function safeMint(address to) public onlyOwner {
     uint256 tokenId = _tokenIdCounter.current();

@@ -1,8 +1,11 @@
 import { useMoralis } from "react-moralis";
 import { Button, Text } from "@mantine/core";
 
+// Button for changing network
 const ChangeNetwork = () => {
   const { Moralis } = useMoralis();
+
+  // Add polygon to metamask
   const addNetwork = async () => {
     const chainId = 137;
     const chainName = "Polygon Mainnet";
@@ -20,6 +23,7 @@ const ChangeNetwork = () => {
     );
   };
 
+  // Switch to polygon
   const switchNetwork = async () => {
     const chainId = 137; //Polygon Mainnet
     const chainIdHex = await Moralis.switchNetwork(137);

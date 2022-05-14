@@ -1,6 +1,6 @@
 //SPDX-License-Identifier: MIT
-import "@openzeppelin/contracts/token/IERC721/IERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 pragma solidity ^0.8.1;
 
@@ -10,6 +10,7 @@ contract Community {
   using Counters for Counters.Counter;
   Counters.Counter private memberCount;
   Counters.Counter private memberIds;
+  IERC721 public collection;
 
   struct MemberInfo {
     uint256 joined;
@@ -21,7 +22,7 @@ contract Community {
   }
 
   mapping(uint256 => MemberInfo) public members;
-  mapping(address => members) public getMember;
+  mapping(address => mapping(uint256 => MemberInfo)) public getMember;
 
   constructor() public {
     factory = msg.sender;
@@ -31,6 +32,7 @@ contract Community {
   function initialize(address _nftContract) external {
     require(msg.sender == factory, "Community: FORBIDDEN");
     nftContract = _nftContract;
+    collection = IERC721(_nftContract);
   }
 
   function getNftBalance(address _user)
@@ -38,7 +40,6 @@ contract Community {
     view
     returns (uint256 balance)
   {
-    IERC721 collection = IERC721(nftContractAddress);
     balance = collection.balanceOf(_user);
 
     return balance;
@@ -64,12 +65,12 @@ contract Community {
   function sync() public {
     uint256 _balance;
     for (uint256 i = 0; i < memberIds.current(); i++) {
-      _balance = getUserNftCount(memberList[i]._address);
+      _balance = getNftBalance(getMember[i]._address);
       if (_balance > 0) {
-        members[memberList[i]].nftCount = _balance;
-        members[memberList[i]].currentMember = true;
+        members[i].nftCount = _balance;
+        members[i].currentMember = true;
       } else {
-        members[memberList[i]].currentMember = false;
+        members[i].currentMember = false;
       }
     }
   }

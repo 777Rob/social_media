@@ -15,7 +15,7 @@ contract CommunityFactory {
     returns (address community)
   {
     require(
-      communities[nftAddress] != Null,
+      communities[nftAddress] != address(0),
       "CommunityFactory: COMMUNITY_FOR_GIVEN_NFT_EXISTS"
     );
     require(communities != address(0), "CommunityFactory: ZERO_ADDRESS");
@@ -28,8 +28,8 @@ contract CommunityFactory {
 
     Community(community).initialize(nftAddress);
 
-    communities[community] = Counter.current();
-    Counter.increment();
-    allCommunities.push(pair);
+    communities[community] = _communityIds.current();
+    _communityIds.increment();
+    allCommunities.push(community);
   }
 }

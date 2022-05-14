@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.4;
+pragma solidity ^0.8.1;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -31,12 +31,12 @@ contract SubscribtionBasedCommunity is
     address _beneficiary,
     uint256 _hourlyRate,
     uint256 _minDuration
-  ) ERC721("MyToken", "MTK") {
+  ) ERC721(_name, _ticker) {
     _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
     _grantRole(PAUSER_ROLE, msg.sender);
     _grantRole(MINTER_ROLE, msg.sender);
     _grantRole(BENEFICIARY_ROLE, _beneficiary);
-    _beneficiary hourlyRate = _hourlyRate;
+    hourlyRate = _hourlyRate;
     minDuration = _minDuration;
   }
 
@@ -72,6 +72,4 @@ contract SubscribtionBasedCommunity is
   {
     return super.supportsInterface(interfaceId);
   }
-
-  
 }

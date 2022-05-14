@@ -3,4 +3,8 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 tasks:
+<<<<<<< HEAD
   - init: cd new-client && npm install && npm start
+=======
+  - init: cd client && npm install
+>>>>>>> 9480adec461de7278d09f93e5111cfc8cc036bd8

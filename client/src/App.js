@@ -29,6 +29,7 @@ import "./App.css";
 import { NavbarComponent } from "./components/NavbarComponent";
 import { theme } from "./theme";
 import { ChangeNetwork } from "components/ChangeNetwork";
+import { transform } from "lodash";
 
 const HeaderComponent = ({ toggleColorScheme, colorScheme }) => {
   const theme = useMantineTheme();
@@ -73,6 +74,14 @@ const App = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
+          position: "absolute",
+          top: "50%",
+          width: "100%",
+          transform: "translateY(-50%)",
+          /* transform: "translateY(-50%)" 
+
+             After adding this gives a gray box after the connect button is clicked.
+          */
         }}
         >
         {/* Name */}

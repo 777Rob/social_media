@@ -16,20 +16,31 @@ import { MultiSelect } from "@mantine/core";
 import { PROFILE_CONTRACT_ABI } from "contracts/abis";
 import { PROFILE_CONTRACT_ADDRESS } from "contracts/addresses";
 import { DatePicker, Input, Form } from "web3uikit";
+import { useSnackbar } from 'notistack';
 
 const AccountCreation = () => {
   const { Moralis } = useMoralis();
+  // User object
   const user = Moralis.User.current();
+
+  // Current page
   const [active, setActive] = useState(0);
+
+  // Categories from step1
   const [selectedCategories, setSelectedCategories] = useState([]);
-  const [error, setError] = useState("none");
+  // For making contract calls
   const contractProcessor = useWeb3ExecuteFunction();
+
+  // Notifications
+  const { enqueueSnackbar } = useSnackbar();
 
   const navigate = useNavigate();
 
+  // Function for making contract call
   const mintProfile = async () => {
+    // Call options
     let options = {
-      contractAddress: "0x5b4Eedf2d9290676E2b92BE945fA837Ff69D9745",
+      contractAddress: PROFILE_CONTRACT_ADDRESS,
       abi: PROFILE_CONTRACT_ABI,
       functionName: "createProfile",
       params: {
@@ -39,30 +50,37 @@ const AccountCreation = () => {
       msgValue: Moralis.Units.ETH(0),
     };
 
+    // Call
     await contractProcessor.fetch({
       params: options,
       onSuccess: async () => {
+        // On successfull call create user and navigate home
         console.log("SUCCESS");
         user.set("profileCompleted", true);
         await user.save();
         navigate("/Welcome");
       },
       onError: (error) => {
-        setError(error.data.message);
-        console.log(error.data.message);
+        // On error display error
+        enqueueSnackbar(`Error occured during minting please try again. Error data:${error.message}`, { variant: "error" });
+        console.log(error.message);
       },
     });
   };
 
+  // Go to next step
   const nextStep = async () => {
     console.log(active);
+    // If it is the last step mint profile and navigate home
     if (active === 4) {
       console.log("Subbmiting contract interaction");
       mintProfile();
     }
+    // Check if user selected atleast 1 category
     if (active === 0 && selectedCategories.length < 0) {
       alert("Please select atleast 1 category");
     } else if (active === 0 && selectedCategories.length > 0) {
+      // Save category
       user.set("interestCategories", selectedCategories);
       await user.save();
       setActive(active + 1);
@@ -70,7 +88,7 @@ const AccountCreation = () => {
       setActive(active + 1);
     }
   };
-
+  // Go Back
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
@@ -81,6 +99,8 @@ const AccountCreation = () => {
       </Text>
 
       <Stepper active={active} onStepClick={setActive} breakpoint="sm">
+        {/* Step 1 */}
+
         <Stepper.Step
           label="First step"
           description="Select topic you are interested in"
@@ -122,6 +142,9 @@ const AccountCreation = () => {
             placeholder="Pick all that you like"
           />
         </Stepper.Step>
+
+        {/* Step 2 */}
+
         <Stepper.Step label="Second step" description="Select your user name">
           <Text
             sx={{ fontWeight: "bold", fontSize: "18px", marginBottom: "20px" }}
@@ -135,6 +158,9 @@ const AccountCreation = () => {
             width="70%"
           />
         </Stepper.Step>
+
+        {/* Step 3 */}
+
         <Stepper.Step label="Third step" description="Complete profile">
           <Text
             sx={{ fontWeight: "bold", fontSize: "18px", marginBottom: "20px" }}
@@ -147,10 +173,10 @@ const AccountCreation = () => {
             id="date-picker"
             onChange={function noRefCheck() {}}
           />{" "} */}
-
+          {/* Form  */}
           <Form
             buttonConfig={{
-              onClick: function noRefCheck() {},
+              onClick: function noRefCheck() { },
               theme: "primary",
             }}
             data={[
@@ -190,10 +216,13 @@ const AccountCreation = () => {
                 value: "",
               },
             ]}
-            onSubmit={function noRefCheck() {}}
+            onSubmit={function noRefCheck() { }}
             title="Your Profile"
           />
         </Stepper.Step>
+
+        {/* Step 4 */}
+
         <Stepper.Step
           label="Fourth step"
           description="Configure reward settings"
@@ -207,11 +236,12 @@ const AccountCreation = () => {
         </Stepper.Completed>
       </Stepper>
 
+      {/* Buttons for navigating steps */}
+
       <Group position="apart" mt="xl">
         <Button variant="default" onClick={prevStep}>
           Back
         </Button>
-        {error == !"none" && error}
         <Button onClick={nextStep}>
           {active != 4 ? (
             <Text>Next step</Text>

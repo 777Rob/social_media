@@ -5,6 +5,7 @@ import {
   Text,
   ThemeIcon,
   UnstyledButton,
+  Center,
   useMantineTheme,
 } from "@mantine/core";
 import { Navigation } from "data/Navigation";

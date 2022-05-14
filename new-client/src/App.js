@@ -7,6 +7,7 @@ import {
   Header,
   MantineProvider,
   Text,
+  No,
   useMantineTheme,
 } from "@mantine/core";
 import { LogoText } from "data/Logo";
@@ -75,7 +76,7 @@ const App = () => {
         >
           To continue please connect using Web3 Provider
         </Text>
-        <ConnectButton moralisAuth={true} />;
+        <ConnectButton signingMessage="Welcome to Parsedia." moralisAuth={true} />;
       </Box>
     );
   }

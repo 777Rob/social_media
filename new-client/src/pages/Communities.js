@@ -16,6 +16,8 @@ import _ from "lodash";
 import CreateYourOwn from "data/CreateYourOwn.jpg";
 // TODO: Fetch data for all nfts
 
+
+// Card component to display card data takes in metadata of an NFT and collection name
 function NftCard({ metadata, name }) {
   const theme = useMantineTheme();
 
@@ -64,6 +66,7 @@ const Communities = () => {
   const secondaryColor =
     theme.colorScheme === "dark" ? theme.colors.dark[1] : theme.colors.gray[7];
 
+    // Function for fetching nfts
   const fetchNFTs = async () => {
     // get NFTs for current user on Mainnet
     const userEthNFTs = await Web3Api.account.getNFTs();
@@ -83,6 +86,8 @@ const Communities = () => {
     console.log(polygonNFTs);
     setNfts(polygonNFTs.result);
   };
+
+  // Call function on component mount
   useEffect(() => {
     fetchNFTs();
   }, []);

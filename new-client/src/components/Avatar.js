@@ -1,4 +1,4 @@
-import { Avatar as AvatarMantine } from "@mantine/core";
+import { Avatar as AvatarMantine, Box, Skeleton } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import { defaultImages } from "data/defaultProfileImages";
 import { useMoralis, useMoralisQuery } from "react-moralis";
@@ -7,29 +7,31 @@ const LoadAvatar = ({ userId, props }) => {
   const { Moralis } = useMoralis();
   const Users = Moralis.Object.extend("Users");
   const [profilePic, setProfilePic] = useState(defaultImages[1]);
-  const [loaded, setLoaded] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+
 
   useEffect(() => {
     // Todo make proper loading
     async function getUsers() {
       try {
         const query = new Moralis.Query(Users);
-        const results = await query.find();
-
-        console.log(results);
+        const results = await query.get(userId);
+        console.log(results)
         setProfilePic(results[0].attributes.profileImage);
-        setLoaded(true);
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
     }
 
-    if (!loaded) {
-      getUsers();
-    }
-  }, []);
+  }, [loading, setLoading]);
 
-  return <AvatarMantine src={profilePic} radius="xl" {...props} />;
+  return (
+    <Box>
+      {!loading ? <Skeleton height={50} circle mb="xl" /> : <AvatarMantine src={profilePic} radius="xl" {...props} />}
+    </Box>
+  );
 };
 
 const Avatar = ({ userId, props, src }) => {

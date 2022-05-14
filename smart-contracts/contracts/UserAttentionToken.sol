@@ -6,5 +6,4 @@ contract UserAttentionToken is ERC20 {
   constructor(uint256 initialSupply) ERC20("UserAttentionToken", "UAT") {
     _mint(msg.sender, initialSupply);
   }
-  
 }

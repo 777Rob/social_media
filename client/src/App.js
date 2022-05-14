@@ -8,6 +8,7 @@ import {
   MantineProvider,
   Text,
   No,
+  Grid,
   useMantineTheme,
 } from "@mantine/core";
 import { LogoText } from "data/Logo";
@@ -27,20 +28,21 @@ import { ConnectButton } from "web3uikit";
 import "./App.css";
 import { NavbarComponent } from "./components/NavbarComponent";
 import { theme } from "./theme";
+import { ChangeNetwork } from "components/ChangeNetwork";
 
 const HeaderComponent = ({ toggleColorScheme, colorScheme }) => {
   const theme = useMantineTheme();
   const locationObject = useLocation();
   const locationName = Navigation.filter(
     (item) => locationObject.pathname == item.path
-  )[0].name;
-  console.log(locationName);
+  );
+
   return (
     <Header height={60} p="xs" fixed={true}>
       <Group sx={{ height: "100%" }} px={10} position="apart">
         <LogoText size="45px" />
 
-        <Text sx={theme.headings.sizes.h1}>{locationName}</Text>
+        <Text sx={theme.headings.sizes.h1}>{locationName[0] ? locationName[0].name : ""}</Text>
 
         <ActionIcon
           variant="default"
@@ -61,23 +63,40 @@ const App = () => {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   if (!isAuthenticated) {
+    {
+      /* Page to be shown to the user that is not logged in yet */
+    }
     return (
-      <Box
+      <Grid
+        justify="center"
+        align="center"
         sx={{
           display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginTop: "400px",
           flexDirection: "column",
         }}
-      >
-        <Text
-          sx={{ fontSize: "24px", fontWeight: "bold", marginBottom: "30px" }}
         >
-          To continue please connect using Web3 Provider
-        </Text>
-        <ConnectButton signingMessage="Welcome to Parsedia." moralisAuth={true} />;
-      </Box>
+        {/* Name */}
+        <Grid.Col span={12}>
+          <Text weight={700} sx={{ fontSize: "40px", marginBottom: "20px" }}>
+            Parsedia
+          </Text>
+        </Grid.Col>
+
+        {/* Welcome message to the user */}
+        <Grid.Col span={12}>
+          <Text weight={500} sx={{ fontSize: "24px", marginBottom: "30px" }}>
+            To continue please connect using Web3 Provider
+          </Text>
+        </Grid.Col>
+
+        {/* Login button */}
+        <Grid.Col span={12}>
+          <ConnectButton
+            signingMessage="Welcome to Parsedia!"
+            moralisAuth={true}
+            />
+        </Grid.Col>
+      </Grid>
     );
   }
   if (!user.attributes.profileCompleted) {

@@ -29,7 +29,6 @@ const Home = () => {
         console.error(error);
       }
     }
-
     if (!loaded) {
       getPosts();
     }

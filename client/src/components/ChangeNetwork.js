@@ -37,3 +37,5 @@ const ChangeNetwork = () => {
     </Text>
   );
 };
+
+export default ChangeNetwork;

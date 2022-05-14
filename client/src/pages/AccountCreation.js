@@ -17,6 +17,7 @@ import { PROFILE_CONTRACT_ABI } from "contracts/abis";
 import { PROFILE_CONTRACT_ADDRESS } from "contracts/addresses";
 import { DatePicker, Input, Form } from "web3uikit";
 import { useSnackbar } from 'notistack';
+import ChangeNetwork from "components/ChangeNetwork"
 
 const AccountCreation = () => {
   const { Moralis } = useMoralis();
@@ -58,6 +59,7 @@ const AccountCreation = () => {
         console.log("SUCCESS");
         user.set("profileCompleted", true);
         await user.save();
+        window.location.reload();
         navigate("/Welcome");
       },
       onError: (error) => {
@@ -100,7 +102,6 @@ const AccountCreation = () => {
 
       <Stepper active={active} onStepClick={setActive} breakpoint="sm">
         {/* Step 1 */}
-
         <Stepper.Step
           label="First step"
           description="Select topic you are interested in"

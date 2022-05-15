@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
+import "./styling/index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import { MoralisProvider } from "react-moralis";
-import { NotificationProvider } from "web3uikit";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { SnackbarProvider } from 'notistack';
 
 ReactDOM.render(

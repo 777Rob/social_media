@@ -1,10 +1,6 @@
-import { Box, TextInput, Text, Button, Space } from "@mantine/core";
+import { Box } from "@mantine/core";
 import { useState, useEffect } from "react";
-import { TextField, Stack } from "@mui/material";
 import { useMoralis } from "react-moralis";
-import { Blockie, TextArea } from "web3uikit";
-import { clampUseMovePosition } from "@mantine/hooks";
-import { defaultImages } from "data/defaultProfileImages";
 import Post from "../components/Post";
 import WritePost from "../components/WritePost";
 

@@ -1,4 +1,4 @@
-import { Box, Text, Button } from "@mantine/core";
+import { Box } from "@mantine/core";
 
 const ProfileEdit = () => {
   return (

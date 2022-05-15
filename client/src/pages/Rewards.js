@@ -1,5 +1,4 @@
 import {Widget } from "web3uikit";
-import { Box, Text } from "@mantine/core";
 
 const Rewards = () => {
     return ( <div style={{ display: 'grid', gap: '10px', padding: '20px 10px' }}>

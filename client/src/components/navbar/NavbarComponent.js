@@ -1,4 +1,4 @@
-import { Navbar } from "@mantine/core";
+import { Navbar, ScrollArea } from "@mantine/core";
 import { Navigation } from "../../data/Navigation";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ export const NavbarComponent = () => {
     <Navbar fixed={true} width={{ base: 220 }} p="xs">
 
       {/* Holds links to other pages */}
-      <Navbar.Section grow mt="md">
+      <Navbar.Section grow component={ScrollArea} mt="md">
         {Navigation.map((item) => (
           <NavbarComponentButton name={item.name} icon={item.icon} path={item.path} />
         ))}

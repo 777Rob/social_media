@@ -13,26 +13,6 @@ export const Navigation = [
     icon: <AiFillHome />,
   },
   {
-    name: "Profile",
-    path: "/Profile",
-    icon: <CgProfile />,
-  },
-  {
-    name: "Settings",
-    path: "/Settings",
-    icon: <FiSettings />,
-  },
-  {
-    name: "Rewards",
-    path: "/Rewards",
-    icon: <SiAzuredataexplorer />,
-  },
-  {
-    name: "Notifications",
-    path: "/Notifications",
-    icon: <MdNotifications />,
-  },
-  {
     name: "Communities",
     path: "/Communities",
     icon: <CgCommunity />,
@@ -41,5 +21,15 @@ export const Navigation = [
     name: "Messages",
     path: "/Messages",
     icon: <FiMessageSquare />,
+  },
+  {
+    name: "Notifications",
+    path: "/Notifications",
+    icon: <MdNotifications />,
+  },
+  {
+    name: "Rewards",
+    path: "/Rewards",
+    icon: <SiAzuredataexplorer />,
   },
 ];

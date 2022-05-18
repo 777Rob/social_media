@@ -19,6 +19,7 @@ import { NavbarComponent } from "./components/navbar/NavbarComponent";
 import { HeaderComponent } from "components/HeaderComponent";
 import { theme } from "./styling/theme";
 import { LandingPage } from "pages/LandingPage";
+import { RightSidebar } from "components/rightSidebar/RightSidebarComponent";
 
 
 const App = () => {
@@ -61,7 +62,7 @@ const App = () => {
                     : theme.colors.gray[0],
               },
             })}
-            /* What is always show at the top pf every page */
+            /* What is always show at the top of every page */
             header={
               <HeaderComponent
                 colorScheme={colorScheme}
@@ -70,8 +71,11 @@ const App = () => {
             }
             /* Navbar on the left that contains buttons that lead to other pages */
             navbar={<NavbarComponent/>}
+            /* Sidebar shown on the right */
+            aside={<RightSidebar/>}
           >
-            <Box sx={{ marginTop: 50, marginLeft: 210, padding: "5px" }}>
+            {/* Main body of the screen */}
+            <Box sx={{ marginTop: 50, marginLeft: 210, marginRight: 210, padding: "5px" }}>
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/profile" element={<Profile />} />

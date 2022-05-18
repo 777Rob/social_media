@@ -2,12 +2,14 @@ import { Text, Grid, } from "@mantine/core";
 import React from "react";
 import { ConnectButton } from "web3uikit";
 import "../styling/App.css";
+import { useViewportSize } from '@mantine/hooks';
 
 /* 
     Page shown to the user if the user is not authenticated.
     Provides with an ability to be authenticated using various web3 service providers.
 */
 export const LandingPage = () => {
+    const { height, width } = useViewportSize();
     
     // Return a grid consisting of three maximum size rows
     return (
@@ -18,9 +20,8 @@ export const LandingPage = () => {
             display: "flex",
             flexDirection: "column",
             position: "absolute",
-            top: "50%",
+            top: "35%",
             width: "100%",
-            transform: "translateY(-50%)",
             /* transform: "translateY(-50%)" 
                After adding this gives a gray box after the connect button is clicked.
             */
@@ -35,7 +36,7 @@ export const LandingPage = () => {
   
           {/* Welcome message to the user */}
           <Grid.Col span={12}>
-            <Text weight={500} sx={{ fontSize: "24px", marginBottom: "30px" }}>
+            <Text weight={500} sx={{ marginBottom: "30px", fontSize:  width> 100 ? "24px" : "12px" }}>
               To continue please connect using Web3 Provider
             </Text>
           </Grid.Col>

@@ -30,6 +30,7 @@ export default function WritePost() {
 
   return (
     <Container sx={{display: "flex", flexDirection: "column"}}>
+      {/* Text area to write some text that will be present in a post */}
       <Textarea
         style={{ width: "100%", marginTop: "10px" }}
         placeholder="What's on your mind today?"
@@ -46,7 +47,7 @@ export default function WritePost() {
           setPost({ ...post, text: e.target.value });
         }}
       />
-
+       {/* Button to create a new post */}
       <Button
         radius="md"
         variant="gradient"

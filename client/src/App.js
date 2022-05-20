@@ -21,6 +21,7 @@ import { theme } from "./styling/theme";
 import { LandingPage } from "pages/LandingPage";
 import { RightSidebar } from "components/rightSidebar/RightSidebarComponent";
 
+// Blahauakds
 
 const App = () => {
   const { isAuthenticated, user } = useMoralis();

@@ -29,8 +29,6 @@ export const theme = {
     // Add your color
     'deep-blue': ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
 
-    // or replace default theme color
-    blue: ['#E9EDFC', '#C1CCF6', '#99ABF0' /* ... */],
   },
 
 

@@ -19,6 +19,7 @@ import Profile from "pages/Profile";
 import ProfileEdit from "pages/ProfileEdit";
 import Rewards from "pages/Rewards";
 import Communities from "pages/Communities";
+import CreateYourOwn from "pages/CreateYourOwn";
 import Settings from "pages/Settings";
 import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
@@ -140,6 +141,7 @@ const App = () => {
               <Route path="/AccountCreation" element={<AccountCreation />} />
               <Route path="/Rewards" element={<Rewards />} />
               <Route path="/Communities" element={<Communities />} />
+              <Route path="/Communities/Create" element={<CreateYourOwn />} />
             </Routes>
           </Box>
         </AppShell>

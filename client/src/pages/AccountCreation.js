@@ -16,8 +16,8 @@ import { MultiSelect } from "@mantine/core";
 import { PROFILE_CONTRACT_ABI } from "contracts/abis";
 import { PROFILE_CONTRACT_ADDRESS } from "contracts/addresses";
 import { DatePicker, Input, Form } from "web3uikit";
-import { useSnackbar } from 'notistack';
-import ChangeNetwork from "components/ChangeNetwork"
+import { useSnackbar } from "notistack";
+import ChangeNetwork from "components/ChangeNetwork";
 
 const AccountCreation = () => {
   const { Moralis } = useMoralis();
@@ -64,7 +64,10 @@ const AccountCreation = () => {
       },
       onError: (error) => {
         // On error display error
-        enqueueSnackbar(`Error occured during minting please try again. Error data:${error.message}`, { variant: "error" });
+        enqueueSnackbar(
+          `Error occured during minting please try again. Error data:${error.message}`,
+          { variant: "error" }
+        );
         console.log(error.message);
       },
     });
@@ -177,7 +180,7 @@ const AccountCreation = () => {
           {/* Form  */}
           <Form
             buttonConfig={{
-              onClick: function noRefCheck() { },
+              onClick: function noRefCheck() {},
               theme: "primary",
             }}
             data={[
@@ -217,7 +220,7 @@ const AccountCreation = () => {
                 value: "",
               },
             ]}
-            onSubmit={function noRefCheck() { }}
+            onSubmit={function noRefCheck() {}}
             title="Your Profile"
           />
         </Stepper.Step>

@@ -57,16 +57,25 @@ const dropzoneChildren = (status, theme) => (
   </Group>
 );
 
-const Popup = () => {
-  const { enqueSnackbar } = useSnackbar();
-  const theme = useMantineTheme();
-  const {Moralis} = useMoralis();
+const Popup = ({ fileAction }) => {
+  // Poppup that let's user upload image
 
-  const saveFile = async (file) => {
-    console.log(file)
+  // Snack bar to show an error in case of rejected file
+  const { enqueSnackbar } = useSnackbar();
+  // Moralis to use save ipfs function
+  const { Moralis } = useMoralis();
+  const theme = useMantineTheme();
+
+  // Function that takes in the file and saves it to ipfs
+  const saveFile = async (fileInput) => {
+    const data = fileInput[0];
+    const file = new Moralis.File(data.name, data);
+    await file.saveIPFS();
+    fileAction(await file.ipfs());
   };
 
   return (
+    // Place to drop file in to be saved
     <Dropzone
       onDrop={(files) => saveFile(files)}
       onReject={(files) =>
@@ -80,7 +89,11 @@ const Popup = () => {
   );
 };
 
-const UploadButton = () => {
+// Button that creates a pop up to upload an image
+const UploadButton = ({ fileAction, props }) => {
+  // @param fileAction: Function that returns file link that is saved in ipfs to perform an action with the file
+
+  // State to track if pop up is opened or not
   const [opened, setOpened] = useState(false);
 
   return (
@@ -90,11 +103,11 @@ const UploadButton = () => {
         onClose={() => setOpened(false)}
         title="Introduce yourself!"
       >
-        <Popup />
+        <Popup fileAction={fileAction} />
       </Modal>
 
-      <Group position="center">
-        <Button onClick={() => setOpened(true)}>Upload new image</Button>
+      <Group>
+        <Button {...props} onClick={() => setOpened(true)}>Upload new image</Button>
       </Group>
     </>
   );

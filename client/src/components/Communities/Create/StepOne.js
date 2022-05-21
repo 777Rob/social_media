@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { SET_MEMBERSHIP_TYPE } from "redux/Community/createCommunitySlice";
 
 export const StepOne = () => {
+  // First step of community creation wizzard
   // Get state and dispatch functions
   const state = useSelector((state) => state.createCommunity);
   const dispatch = useDispatch();
 
   // Set selected to the current state
-  // Available options
+
+  // Available options for subscribtion type
   const options = [
     { id: 1, title: "Subscribtion based" },
     { id: 2, title: "One time fee" },
@@ -17,11 +19,13 @@ export const StepOne = () => {
 
   return (
     <>
+      {/* Title */}
       <Text align="center" sx={{ fontSize: "40px", fontWeight: "bold" }}>
         Select subscribtion type
       </Text>
+
+      {/* Map out options into grid */}
       <SimpleGrid cols={3} spacing="xl">
-        {/* Map out options */}
         {options.map((option) => (
           <Box
             onClick={() => {

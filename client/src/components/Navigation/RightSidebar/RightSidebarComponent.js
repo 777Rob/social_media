@@ -4,7 +4,7 @@ import {
     ScrollArea
   } from "@mantine/core";
   import React from "react";
-  import "../../styling/App.css";
+  import "styling/App.css";
   import { MessagesSection } from "./MessagesSection";
   import { CommunitiesSection } from "./CommunitiesSection";
 

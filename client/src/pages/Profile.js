@@ -2,7 +2,7 @@ import { useMoralis } from "react-moralis";
 import { Box, Text, Button, Image } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { CopyButton } from "web3uikit";
-import Avatar from "components/Avatar"
+import Avatar from "components/Common/Avatar"
 
 const Profile = () => {
   const { Moralis, account } = useMoralis();

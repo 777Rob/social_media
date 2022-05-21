@@ -3,7 +3,7 @@ import { Box, Text, Button } from "@mantine/core";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useMoralis } from "react-moralis";
-import UploadButton from "components/UploadFileButton";
+import UploadButton from "components/Common/UploadFileButton";
 
 // const ProfileSchema = Yup.object().shape({
 //   userName: Yup.string()

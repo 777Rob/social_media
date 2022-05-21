@@ -3,9 +3,9 @@ import {
     Box,
   } from "@mantine/core";
   import React from "react";
-  import "../../styling/App.css";
+  import "styling/App.css";
 
-export const CommunitiesSection = () => {
+export const MessagesSection = () => {
 
     return (
         <Box 
@@ -18,18 +18,25 @@ export const CommunitiesSection = () => {
               theme.colorScheme === "dark" ? theme.colors.dark[0] : theme.black,
           })}
         >
-            <Text sx={{ fontSize: "14px", fontWeight: "bold", padding: "10px" }}>
-                Communities
+            <Text sx={{  fontSize: "14px", fontWeight: "bold", padding: "10px", alignContent: "center" }}>
+                Messages
             </Text>
             <Text>
-                My community 1
+                Messages 1
             </Text>
             <Text>
-                My community 2
+                Messages 2
             </Text>
             <Text>
-                My community 3
+                Messages 3
             </Text>
         </Box>
     );
   };
+
+  /*
+border: "1px solid black",
+            borderRadius: "15px",
+            padding: "10px"
+
+  */

@@ -1,12 +1,8 @@
-import {
-  Stepper,
-  Button,
-  Group,
-} from "@mantine/core";
-import { useState, useReducer } from "react";
+import { Button, Group, Stepper } from "@mantine/core";
 import { StepOne } from "components/Communities/Create/StepOne";
-import { StepTwo } from "components/Communities/Create/StepTwo";
 import { StepThree } from "components/Communities/Create/StepThree";
+import { StepTwo } from "components/Communities/Create/StepTwo";
+import { useState } from "react";
 
 const CreateYourOwn = () => {
   // Set active step
@@ -29,7 +25,7 @@ const CreateYourOwn = () => {
           <StepTwo />
         </Stepper.Step>
         <Stepper.Step label="Final step" description="Review and mint">
-          <StepThree/>
+          <StepThree />
         </Stepper.Step>
         <Stepper.Completed>
           Completed, click back button to get to previous step

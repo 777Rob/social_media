@@ -8,8 +8,6 @@ import {
 import React from "react";
 
 // Card component to display card data takes in metadata of an NFT and collection name
-
-
 export function NftCard({ metadata, name }) {
   const theme = useMantineTheme();
 

@@ -14,7 +14,7 @@ import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight, UserCircle, Logout, Settings } from "tabler-icons-react";
-import Avatar from "../Avatar";
+import Avatar from "../../Common/Avatar";
 
 /*
     Located at the bottom of the navbar

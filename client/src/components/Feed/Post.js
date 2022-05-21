@@ -1,6 +1,6 @@
 import { Box,Card, Text, Image, useMantineTheme, Grid, Container } from "@mantine/core";
 import { defaultImages } from "data/defaultProfileImages";
-import Avatar from "components/Avatar";
+import Avatar from "components/Common/Avatar";
 
 export default function Post({ post }) {
   const theme = useMantineTheme();

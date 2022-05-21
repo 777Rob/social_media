@@ -17,7 +17,7 @@ import { PROFILE_CONTRACT_ABI } from "contracts/abis";
 import { PROFILE_CONTRACT_ADDRESS } from "contracts/addresses";
 import { DatePicker, Input, Form } from "web3uikit";
 import { useSnackbar } from "notistack";
-import ChangeNetwork from "components/ChangeNetwork";
+import ChangeNetwork from "components/Common/ChangeNetwork";
 
 const AccountCreation = () => {
   const { Moralis } = useMoralis();

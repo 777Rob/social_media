@@ -1,11 +1,12 @@
 import { Text, Box, Button, Image, TextInput } from "@mantine/core";
-import UploadButton from "components/UploadFileButton";
+import UploadButton from "components/Common/UploadFileButton";
 import { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_COMMUNITY_DETAILS } from "redux/Community/createCommunitySlice";
 
 export const StepTwo = () => {
+  // Second step of community creation wizzard`
   // Get state and dispatch function
 
   const state = useSelector(state => state.createCommunity);

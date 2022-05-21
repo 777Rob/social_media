@@ -7,7 +7,7 @@ import {
   TextInput,
   Center,
 } from "@mantine/core";
-import UploadButton from "components/UploadFileButton";
+import UploadButton from "components/Common/UploadFileButton";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
@@ -17,9 +17,12 @@ import { useSnackbar } from "notistack";
 
 export const StepThree = () => {
   const { Moralis } = useMoralis();
+
+  // Use selector to get community type from redux state
   const communityType = useSelector(
     (state) => state.createCommunity.communityType
   );
+  // Get instance of contract processor
   const contractProcessor = useWeb3ExecuteFunction();
 
   // Get community details from redux state
@@ -27,11 +30,15 @@ export const StepThree = () => {
     (state) => state.createCommunity.communityDetails
   );
 
-  // Notifications
+  // Get enqueueSnackbar function for pushing notifications in que for display
   const { enqueueSnackbar } = useSnackbar();
 
+  // Function to create custom community by calling createCustomCommunity function on community factory contract
+  // (Create a nft collection with specified params and use it to call create a community instance using newly
+  //  created nft collection)
+
   const createCustomCommunity = async () => {
-    // Call options
+    // Specify call options
     // TODO: FINISH CONTRACT AND ADD ALL OPTIONS
     // @params
     // string memory _name,
@@ -51,31 +58,32 @@ export const StepThree = () => {
       msgValue: Moralis.Units.ETH(0),
     };
 
-    // Call
+    // Execute the call it will request user to sign the transaction
     await contractProcessor.fetch({
       params: options,
+      // On success show success notification
+      // Todo REDIRECT
       onSuccess: async () => {
-        enqueueSnackbar(`Success`, { variant: "error" });
+        enqueueSnackbar(`Success`, { variant: "success" });
       },
       onError: (error) => {
-        // On error display error
+        // On error display error notification
         enqueueSnackbar(
           `Error occured during minting please try again. Error data:${error.message}`,
           { variant: "error" }
         );
-        console.log(error.message);
       },
     });
   };
 
-  // Function to mint a NFT hence create a community
+  // Function
   const handleMint = () => {
     // Get community type from redux state
 
     if (communityType == 1) {
       // TODO: HANDLE SUBSCRIBTION BASED COMMUNITIES
-    }else{
-        createCustomCommunity();
+    } else {
+      createCustomCommunity();
     }
   };
 
@@ -92,10 +100,12 @@ export const StepThree = () => {
 
   return (
     <Box sx={{ spacing: "20px" }}>
+      {/* Title */}
       <Text sx={{ fontSize: "24px", fontWeight: "bold" }} align="center">
         Summary
       </Text>
       <Divider />
+
       {/* Map through all values */}
       {formatedValues.map(
         (value) =>
@@ -108,12 +118,14 @@ export const StepThree = () => {
             </Center>
           )
       )}
+
       {/* Image */}
       <Text sx={{ fontSize: "20px", fontWeight: "bold" }} align="center">
         Image
       </Text>
       <Image src={communityDetails.Image} />
 
+      {/* Mint button */}
       <Button onClick={() => handleMint()}>Complete and mint NFT</Button>
     </Box>
   );

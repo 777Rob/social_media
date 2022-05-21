@@ -16,11 +16,11 @@ import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Route, Routes } from "react-router-dom";
 import "./styling/App.css";
-import { NavbarComponent } from "./components/navbar/NavbarComponent";
-import { HeaderComponent } from "components/HeaderComponent";
+import { NavbarComponent } from "./components/Navigation/Navbar/NavbarComponent";
+import { HeaderComponent } from "components/Navigation/HeaderComponent";
 import { theme } from "./styling/theme";
 import { LandingPage } from "pages/LandingPage";
-import { RightSidebar } from "components/rightSidebar/RightSidebarComponent";
+import { RightSidebar } from "components/Navigation/RightSidebar/RightSidebarComponent";
 import Community from "pages/Community";
 // Testuojam
 

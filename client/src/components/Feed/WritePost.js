@@ -10,7 +10,7 @@ import {
 import { defaultImages } from "data/defaultProfileImages";
 import { useMoralis } from "react-moralis";
 import { useState } from "react";
-import Avatar from "components/Avatar";
+import Avatar from "components/Common/Avatar";
 
 export default function WritePost() {
   const { Moralis, user, account } = useMoralis();

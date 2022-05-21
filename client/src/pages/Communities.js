@@ -6,7 +6,7 @@ import {
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import {useMoralis} from "react-moralis";
-import { withNfts } from "components/withNfts";
+import { withNfts } from "components/Loader/withNfts";
 import { UserNfts } from "components/Communities/UserNfts";
 import {useNavigate} from "react-router-dom"
 

@@ -7,12 +7,15 @@ import {
   Text,
   Divider,
 } from "@mantine/core";
-import { SplitScreen } from "components/SplitScreen";
-import { withCommunityTopics } from "./withCommunityTopics";
-import { withCommunityCategories } from "./withCommunityCategories";
+import { SplitScreen } from "components/Common/SplitScreen";
+import { withCommunityTopics } from "components/Loader/withCommunityTopics";
+import { withCommunityCategories } from "components/Loader/withCommunityCategories";
 
 const LatestTopicList = ({ topics }) => {
-  console.log(`topics`, topics);
+  // @Param: List of topics
+  // A component for displaying latest topics
+
+  // Format rows
   const rows = topics.map((topic) => (
     <tr key={topic.topic}>
       <td>
@@ -28,14 +31,18 @@ const LatestTopicList = ({ topics }) => {
     </tr>
   ));
 
+  // Return table with formated rows
   return (
     <>
       <Table verticalSpacing="md" fontSize="lg" striped highlightOnHover>
-      <thead>
+        {/* Head */}
+        <thead>
           <tr>
             <th>Latest</th>
           </tr>
         </thead>
+
+        {/* Body */}
         <tbody>{rows && rows} </tbody>
       </Table>
     </>
@@ -43,6 +50,9 @@ const LatestTopicList = ({ topics }) => {
 };
 
 const CategoryList = ({ categories }) => {
+  // Given list categories display them
+
+  //   Format table rows
   const rows = categories.map((category) => (
     <tr key={category.name}>
       <td style={{ borderLeft: `3px solid ${category.color || "blue"}` }}>
@@ -54,15 +64,19 @@ const CategoryList = ({ categories }) => {
     </tr>
   ));
 
+  //   Return table
   return (
     <>
       <Table verticalSpacing="md" fontSize="lg" striped highlightOnHover>
+        {/* Head */}
         <thead>
           <tr>
             <th>Category</th>
             <th>Topics</th>
           </tr>
         </thead>
+
+        {/* Body */}
         <tbody>{rows && rows} </tbody>
       </Table>
     </>
@@ -70,11 +84,13 @@ const CategoryList = ({ categories }) => {
 };
 
 const CategoriesPage = ({ categories }) => {
+  // Categories page of an community
+  //   Load data into both sides
   const RightSideLoaded = withCommunityTopics(LatestTopicList, "xd");
   const LeftSideLoaded = withCommunityCategories(CategoryList, "xd");
-  return (
-    <SplitScreen left={LeftSideLoaded} right={RightSideLoaded} />
-  );
+
+  //   Return split screen component with both sides loaded
+  return <SplitScreen left={LeftSideLoaded} right={RightSideLoaded} />;
 };
 
 export default CategoriesPage;

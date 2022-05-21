@@ -1,5 +1,5 @@
 import { Navbar, ScrollArea } from "@mantine/core";
-import { Navigation } from "../../data/Navigation";
+import { Navigation } from "../../../data/Navigation";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { NavbarComponentFooter } from "./NavbarComponentFooter";

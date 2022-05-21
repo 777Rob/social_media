@@ -10,7 +10,7 @@ import {
   import React from "react";
   import { useLocation } from "react-router-dom";
   import { MoonStars, Sun } from "tabler-icons-react";
-  import "../styling/App.css";
+  import "styling/App.css";
 
 export const HeaderComponent = ({ toggleColorScheme, colorScheme }) => {
     const theme = useMantineTheme();

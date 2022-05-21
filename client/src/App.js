@@ -21,7 +21,7 @@ import { HeaderComponent } from "components/HeaderComponent";
 import { theme } from "./styling/theme";
 import { LandingPage } from "pages/LandingPage";
 import { RightSidebar } from "components/rightSidebar/RightSidebarComponent";
-
+import Community from "pages/Community";
 // Testuojam
 
 const App = () => {
@@ -32,9 +32,8 @@ const App = () => {
 
   if (!isAuthenticated) {
     // Page to be shown to the user that is not authenticated yet
-    return <LandingPage />
-  }
-  else {
+    return <LandingPage />;
+  } else {
     // If a user is authenticated already, but his/her profile is not completed yet,
     // redirect to the AccountCreation page
 
@@ -72,12 +71,19 @@ const App = () => {
               />
             }
             /* Navbar on the left that contains buttons that lead to other pages */
-            navbar={<NavbarComponent/>}
+            navbar={<NavbarComponent />}
             /* Sidebar shown on the right */
-            aside={<RightSidebar/>}
+            aside={<RightSidebar />}
           >
             {/* Main body of the screen */}
-            <Box sx={{ marginTop: 50, marginLeft: 210, marginRight: 210, padding: "5px" }}>
+            <Box
+              sx={{
+                marginTop: 50,
+                marginLeft: 210,
+                marginRight: 210,
+                padding: "5px",
+              }}
+            >
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/profile" element={<Profile />} />
@@ -86,6 +92,8 @@ const App = () => {
                 <Route path="/AccountCreation" element={<AccountCreation />} />
                 <Route path="/Rewards" element={<Rewards />} />
                 <Route path="/Communities" element={<Communities />} />
+                <Route path="/Communities/:id" element={<Community />} />
+                <Route path="/Communities/Create" element={<CreateYourOwn />} />
               </Routes>
             </Box>
           </AppShell>

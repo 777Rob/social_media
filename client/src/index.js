@@ -8,8 +8,6 @@ import { Route, Routes, BrowserRouter } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
 import { Provider } from "react-redux";
 import store from "redux/store";
-import { BrowserRouter } from "react-router-dom";
-import { SnackbarProvider } from 'notistack';
 
 ReactDOM.render(
   <React.StrictMode>

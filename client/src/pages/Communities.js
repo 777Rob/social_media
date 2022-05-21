@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Divider,
   Text,
 } from "@mantine/core";
@@ -7,11 +8,12 @@ import React, { useEffect, useState } from "react";
 import {useMoralis} from "react-moralis";
 import { withNfts } from "components/withNfts";
 import { UserNfts } from "components/Communities/UserNfts";
-
+import {useNavigate} from "react-router-dom"
 
 const Communities = () => {
   const {account} = useMoralis();
   const UserNftsWithLoader = withNfts(UserNfts, account)
+const navigate = useNavigate();
 
   return (
     <Box>
@@ -44,7 +46,9 @@ const Communities = () => {
       >
         You haven't joined any communities ....
       </Text>
-
+        <Button onClick={() => navigate("mock")}>
+          Mock community
+        </Button>
       <Text align="center" sx={{ fontSize: "30px", fontWeight: "500" }}>
         Available Communities
       </Text>

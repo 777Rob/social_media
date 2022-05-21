@@ -4,24 +4,30 @@ import {
   ColorSchemeProvider,
   MantineProvider,
 } from "@mantine/core";
+import CommunityCategory from "components/Communities/CommunityCategory";
+import CategoriesPage from "components/Communities/CategoriesPage";
+import CommunitiesFeed from "components/Communities/CommunitiesFeed";
+import CommunitiesLatest from "components/Communities/CommunitiesLatest";
+import DisplayTopics from "components/Communities/DisplayTopics";
+import { HeaderComponent } from "components/Navigation/HeaderComponent";
+import { RightSidebar } from "components/Navigation/RightSidebar/RightSidebarComponent";
 import AccountCreation from "pages/AccountCreationPage";
+import Communities from "pages/Communities";
+import Community from "pages/Community";
+import CreateYourOwn from "pages/CreateYourOwn";
 import Home from "pages/Home";
+import { LandingPage } from "pages/LandingPage";
 import Profile from "pages/Profile";
 import ProfileEdit from "pages/ProfileEdit";
 import Rewards from "pages/Rewards";
-import Communities from "pages/Communities";
-import CreateYourOwn from "pages/CreateYourOwn";
 import Settings from "pages/Settings";
 import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Route, Routes } from "react-router-dom";
-import "./styling/App.css";
+import CommunityTopic from "components/Communities/CommunityTopic";
 import { NavbarComponent } from "./components/Navigation/Navbar/NavbarComponent";
-import { HeaderComponent } from "components/Navigation/HeaderComponent";
+import "./styling/App.css";
 import { theme } from "./styling/theme";
-import { LandingPage } from "pages/LandingPage";
-import { RightSidebar } from "components/Navigation/RightSidebar/RightSidebarComponent";
-import Community from "pages/Community";
 // Testuojam
 
 const App = () => {
@@ -29,6 +35,8 @@ const App = () => {
   const [colorScheme, setColorScheme] = useState("light");
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+
+  const [displayRightSideBar,setDisplayRightSidebar] = useState(true);
 
   if (!isAuthenticated) {
     // Page to be shown to the user that is not authenticated yet
@@ -67,13 +75,15 @@ const App = () => {
             header={
               <HeaderComponent
                 colorScheme={colorScheme}
+                displayRightSidebar={displayRightSideBar}
                 toggleColorScheme={toggleColorScheme}
+                setDisplayRightSidebar={setDisplayRightSidebar}
               />
             }
             /* Navbar on the left that contains buttons that lead to other pages */
             navbar={<NavbarComponent />}
             /* Sidebar shown on the right */
-            aside={<RightSidebar />}
+            aside={<RightSidebar display={displayRightSideBar}/>}
           >
             {/* Main body of the screen */}
             <Box
@@ -92,7 +102,17 @@ const App = () => {
                 <Route path="/AccountCreation" element={<AccountCreation />} />
                 <Route path="/Rewards" element={<Rewards />} />
                 <Route path="/Communities" element={<Communities />} />
-                <Route path="/Communities/:id" element={<Community />} />
+
+                <Route path="/Community/:address" element={<Community />}>
+                  <Route path="categories" element={<CategoriesPage />} />
+                  <Route path="topic/:topic" element={<CommunityTopic/>} />
+                  <Route path="" element={<CommunitiesLatest />} />
+                  <Route path="feed" element={<CommunitiesFeed />} />
+                  <Route
+                    path="categories/:category"
+                    element={<CommunityCategory />}
+                  />
+                </Route>
                 <Route path="/Communities/Create" element={<CreateYourOwn />} />
               </Routes>
             </Box>

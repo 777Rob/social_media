@@ -10,6 +10,7 @@ import {
 import { SplitScreen } from "components/Common/SplitScreen";
 import { withCommunityTopics } from "components/Loader/withCommunityTopics";
 import { withCommunityCategories } from "components/Loader/withCommunityCategories";
+import { useNavigate } from "react-router-dom";
 
 const LatestTopicList = ({ topics }) => {
   // @Param: List of topics
@@ -52,10 +53,20 @@ const LatestTopicList = ({ topics }) => {
 const CategoryList = ({ categories }) => {
   // Given list categories display them
 
+  // For navigation into category
+  const navigate = useNavigate();
+
   //   Format table rows
   const rows = categories.map((category) => (
     <tr key={category.name}>
-      <td style={{ borderLeft: `3px solid ${category.color || "blue"}` }}>
+      {/* On click navigate into categories id */}
+      <td
+        onClick={() => navigate(`${category.id}`)}
+        style={{
+          cursor: "pointer",
+          borderLeft: `3px solid ${category.color || "blue"}`,
+        }}
+      >
         <Text sx={{ fontSize: "24px", fontWeight: "bold" }}>
           {category.name}
         </Text>
@@ -64,7 +75,7 @@ const CategoryList = ({ categories }) => {
     </tr>
   ));
 
-  //   Return table
+  //Return table
   return (
     <>
       <Table verticalSpacing="md" fontSize="lg" striped highlightOnHover>
@@ -83,7 +94,7 @@ const CategoryList = ({ categories }) => {
   );
 };
 
-const CategoriesPage = ({ categories }) => {
+const CategoriesPage = () => {
   // Categories page of an community
   //   Load data into both sides
   const RightSideLoaded = withCommunityTopics(LatestTopicList, "xd");

@@ -1,11 +1,11 @@
 import { Text, Box, Divider, Table, Tabs } from "@mantine/core";
-import LatestTopicsPage from "./LatestPage";
+import DisplayTopics from "./DisplayTopics";
 import CategoriesPage from "./CategoriesPage";
 import { withCommunityTopics } from "components/Loader/withCommunityTopics";
 import CommunitiesFeed from "./CommunitiesFeed";
 
 const CommunityLanding = () => {
-  const LatestTopicsPageLoaded = withCommunityTopics(LatestTopicsPage, "xd");
+  const LatestTopicsPageLoaded = withCommunityTopics(DisplayTopics, {query: "GET_LATEST_TOPICS"});
 
   return (
     <Text>

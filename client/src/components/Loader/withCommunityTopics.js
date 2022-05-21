@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import {MockTopics} from "data/MockTopics";
+import { MockTopics } from "data/MockTopics";
+import React, { useEffect, useState } from "react";
 
-export const withCommunityTopics = (Component, address) => {
+export const withCommunityTopics = (Component, params) => {
   // HOC That takes in  a compontent and address of an community nft collection and returns component with loaded topics
-
+// Take in params and perform actual query to database
   return (props) => {
     const [topics, setTopics] = useState([]);
 

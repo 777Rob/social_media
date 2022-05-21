@@ -5,10 +5,11 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@mantine/core": "^4.2.4",
+    "@mantine/core": "^4.2.5",
     "@mantine/dropzone": "^4.2.4",
-    "@mantine/hooks": "^4.2.4",
+    "@mantine/hooks": "^4.2.5",
     "@mantine/modals": "^4.2.4",
+    "@mantine/rte": "^4.2.5",
     "@mui/material": "^5.7.0",
     "@reduxjs/toolkit": "^1.8.1",
     "@testing-library/jest-dom": "^5.16.4",

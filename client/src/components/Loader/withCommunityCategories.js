@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
 import { MockCategories } from "data/MockCategories";
+import React, { useEffect, useState } from "react";
 
-export const withCommunityCategories = (Component, address) => {
+export const withCommunityCategories = (Component, params) => {
   // HOC That takes in  a compontent and address of an community nft collection and returns component with loaded Categories
-
+// @TODO: Use params and perform actual query to database
   return (props) => {
     const [categories, setCategories] = useState([]);
 

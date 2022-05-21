@@ -46,3 +46,52 @@ export const MockTopics = [
     ],
   },
 ];
+
+export const MockTopicPostsFull = [
+  {
+    user: {
+      avatar: defaultImages[0],
+      userName: "postGod",
+    },
+    date: "21 May",
+    text: "Nicee i can post !!!! ",
+    likes: 6,
+    views: 420,
+  },
+  {
+    user: {
+      avatar: defaultImages[1],
+      userName: "commenter",
+    },
+    date: "1 Jan",
+    text: "Nice post bro",
+    likes: 5,
+  },
+  {
+    user: {
+      avatar: defaultImages[2],
+      userName: "TheCommenter",
+    },
+    date: "1 Jan",
+    text: "Yes",
+    likes: 5,
+  },
+  {
+    user: {
+      avatar: defaultImages[1],
+      userName: "Komentatorius",
+    },
+    date: "1 Jan",
+    text: "Nice post bro",
+    likes: 2,
+  },
+  {
+    user: {
+      avatar: defaultImages[1],
+      userName: "commenter",
+    },
+    date: "1 Jan",
+    text: "+Rep",
+    likes: 5,
+  },
+];

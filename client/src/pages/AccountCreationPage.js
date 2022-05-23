@@ -13,7 +13,7 @@ import { Categories } from "data/Categories/categories";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { MultiSelect } from "@mantine/core";
-import { PROFILE_CONTRACT_ABI } from "contracts/abis";
+import { PROFILE_CONTRACT_ABI } from "contracts/ABI/PROFILE_CONTRACT_ABI";
 import { PROFILE_CONTRACT_ADDRESS } from "contracts/addresses";
 import { DatePicker, Input, Form } from "web3uikit";
 import { useSnackbar } from "notistack";

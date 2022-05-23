@@ -46,7 +46,7 @@ const navigate = useNavigate();
       >
         You haven't joined any communities ....
       </Text>
-        <Button onClick={() => navigate("mock")}>
+        <Button sx={{height: "100px"}} fullWidth onClick={() => navigate("/community/mock")}>
           Mock community
         </Button>
       <Text align="center" sx={{ fontSize: "30px", fontWeight: "500" }}>

@@ -11,7 +11,7 @@ import UploadButton from "components/Common/UploadFileButton";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
-import { COMMUNITY_FACTORY_ABI } from "contracts/abis";
+import { COMMUNITY_FACTORY_ABI } from "contracts/ABI/COMMUNITY_FACTORY_ABI";
 import { COMMUNITY_FACTORY_ADDRESS } from "contracts/addresses";
 import { useSnackbar } from "notistack";
 
@@ -99,7 +99,7 @@ export const StepThree = () => {
   });
 
   return (
-    <Box sx={{ spacing: "20px" }}>
+    <Box sx={{ spacing: "20px", display: "flex", alignItems: "center", flexDirection: "column", spacing: 10 }}>
       {/* Title */}
       <Text sx={{ fontSize: "24px", fontWeight: "bold" }} align="center">
         Summary

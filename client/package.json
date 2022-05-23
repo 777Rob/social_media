@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.6.4",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mantine/core": "^4.2.5",
@@ -16,6 +17,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "formik": "^2.2.9",
+    "graphql": "^16.5.0",
     "lodash": "^4.17.21",
     "moralis": "^1.7.0",
     "notistack": "^2.0.5",

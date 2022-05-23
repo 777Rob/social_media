@@ -9,7 +9,7 @@ export const RightSidebar = ({ displayRightSideBar }) => {
  const sidebar = useSelector(state => state.appUtils.sidebar);
 
   return (
-    <Aside sx={{display: sidebar ? "flex" : "none"}} fixed={true} width={{ base: 220 }} p="xs">
+    <Aside sx={{display: sidebar ? "flex" : "none"}} fixed={true} width={{ base: sidebar ? 220 : 0 }} p="xs">
       <Grid
         justify="center"
         sx={{

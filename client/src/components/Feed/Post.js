@@ -1,63 +1,40 @@
-import { Box,Card, Text, Image, useMantineTheme, Grid, Container } from "@mantine/core";
-import { defaultImages } from "data/defaultProfileImages";
+import { Card, Text, Grid, Divider } from "@mantine/core";
 import Avatar from "components/Common/Avatar";
+import "../../styling/post-styling.css";
 
 export default function Post({ post }) {
-  const theme = useMantineTheme();
-
   return (
-    <Card
-      className="post"
-      sx={{
-        borderRadius: "10px",
-        borderBottom: "1px solid #dadada",
-        padding: "25px",
-        justifyContent: "space-between",
-        margin: "20px",
-        marginRight: "40px",
-        marginLeft: "40px"
-      }}
-    >
+    <Card className="post">
       {/* Post structure */}
       <Grid>
-
         {/* First row is of size 12 (the maximum is 12) and consists of the user's avatar and username */}
-        <Grid.Col span={12} sx={{display: "flex", alignItems: "center"}}>
-
+        <Grid.Col className="post--first--row">
             <Avatar userId={post.attributes.User} />
-            <Text size="md" weight={500} style={{ marginLeft: "5px" }}>
-              User id: {post.attributes.userId}
+            <Text size="md" className="post--author">
+              Anonymous
             </Text>
-
+            {/* Date when the post was created */}
+            <Text size="sm" color="Gray">
+              {post.attributes.createdAt.toLocaleString("en-GB", {
+                dateStyle: "medium",
+                timeStyle: "medium",
+                hour12: false,
+              })}
+            </Text>
         </Grid.Col>
 
         {/* Second row contains post text */}
-        <Grid.Col span={12}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "start",
-            flexDirection: "column",
-            gap: "15px",
-            width: "85%",
-          }}
-        >
+        <Grid.Col span={12} className="post--content">
           <Text size="md">
             {post.attributes.Text}
           </Text>
-        </Box>
         </Grid.Col>
 
-        {/* Third row contains post date */}
+        {/* Divider */}
         <Grid.Col span={12}>
-          <Text size="sm" color="Gray">
-            {post.attributes.createdAt.toLocaleString("en-GB", {
-              dateStyle: "medium",
-              timeStyle: "medium",
-              hour12: false,
-            })}
-          </Text>
+          <Divider className="divider"/>
         </Grid.Col>
+
       </Grid>
     </Card>
   );

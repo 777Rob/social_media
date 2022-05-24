@@ -39,6 +39,7 @@ export const Navigation = [
     path: "/Advertising",
     icon: <FcAdvertising />,
   },
+  {
     name: "Explore",
     path: "/Explore",
     icon: <FaGlobe />,

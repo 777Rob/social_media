@@ -1,12 +1,12 @@
-import { Card, Text, Grid, Divider } from "@mantine/core";
+import { Card, Text, Grid, Divider, useMantineTheme } from "@mantine/core";
 import Avatar from "components/Common/Avatar";
 import "../../styling/post-styling.css";
 
 export default function Post({ post }) {
+  const theme = useMantineTheme();
+
   return (
-    <Card className="post">
-      {/* Post structure */}
-      <Grid>
+      <Grid sx={{backgroundColor:"white", margin: "20px", borderRadius: "10px"}}>
         {/* First row is of size 12 (the maximum is 12) and consists of the user's avatar and username */}
         <Grid.Col className="post--first--row">
             <Avatar userId={post.attributes.User} />
@@ -36,6 +36,5 @@ export default function Post({ post }) {
         </Grid.Col>
 
       </Grid>
-    </Card>
   );
 }

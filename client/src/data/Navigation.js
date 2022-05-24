@@ -4,6 +4,7 @@ import { CgCommunity, CgProfile } from "react-icons/cg";
 import { FiSettings, FiMessageSquare } from "react-icons/fi";
 import { SiAzuredataexplorer } from "react-icons/si";
 import { MdNotifications } from "react-icons/md";
+import { FcAdvertising } from "react-icons/fc";
 
 // @TODO: Change Icons maybe use web3uikit
 export const Navigation = [
@@ -31,5 +32,10 @@ export const Navigation = [
     name: "Rewards",
     path: "/Rewards",
     icon: <SiAzuredataexplorer />,
+  },
+  {
+    name: "Post an Ad",
+    path: "/Advertising",
+    icon: <FcAdvertising />,
   },
 ];

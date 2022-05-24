@@ -28,6 +28,7 @@ import CommunityTopic from "components/Communities/CommunityTopic";
 import { NavbarComponent } from "./components/Navigation/Navbar/NavbarComponent";
 import "./styling/App.css";
 import { theme } from "./styling/theme";
+import Advertising from "pages/Advertising";
 // Testuojam
 
 const App = () => {
@@ -102,7 +103,7 @@ const App = () => {
                 <Route path="/AccountCreation" element={<AccountCreation />} />
                 <Route path="/Rewards" element={<Rewards />} />
                 <Route path="/Communities" element={<Communities />} />
-
+                <Route path="/Advertising" element={<Advertising />} />
                 <Route path="/Community/:address" element={<Community />}>
                   <Route path="categories" element={<CategoriesPage />} />
                   <Route path="topic/:topic" element={<CommunityTopic/>} />

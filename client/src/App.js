@@ -27,6 +27,7 @@ import { Route, Routes } from "react-router-dom";
 import CommunityTopic from "components/Communities/CommunityTopic";
 import { NavbarComponent } from "./components/Navigation/Navbar/NavbarComponent";
 import "./styling/App.css";
+import Explore from "pages/Explore";
 import { theme } from "./styling/theme";
 import Advertising from "pages/Advertising";
 // Testuojam
@@ -37,7 +38,7 @@ const App = () => {
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
-  const [displayRightSideBar,setDisplayRightSidebar] = useState(true);
+  const [displayRightSideBar, setDisplayRightSidebar] = useState(true);
 
   if (!isAuthenticated) {
     // Page to be shown to the user that is not authenticated yet
@@ -84,7 +85,7 @@ const App = () => {
             /* Navbar on the left that contains buttons that lead to other pages */
             navbar={<NavbarComponent />}
             /* Sidebar shown on the right */
-            aside={<RightSidebar display={displayRightSideBar}/>}
+            aside={<RightSidebar display={displayRightSideBar} />}
           >
             {/* Main body of the screen */}
             <Box
@@ -104,9 +105,11 @@ const App = () => {
                 <Route path="/Rewards" element={<Rewards />} />
                 <Route path="/Communities" element={<Communities />} />
                 <Route path="/Advertising" element={<Advertising />} />
+
+                <Route path="/Explore" element={<Explore />} />
                 <Route path="/Community/:address" element={<Community />}>
                   <Route path="categories" element={<CategoriesPage />} />
-                  <Route path="topic/:topic" element={<CommunityTopic/>} />
+                  <Route path="topic/:topic" element={<CommunityTopic />} />
                   <Route path="" element={<CommunitiesLatest />} />
                   <Route path="feed" element={<CommunitiesFeed />} />
                   <Route

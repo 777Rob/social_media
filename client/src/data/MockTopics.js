@@ -1,4 +1,5 @@
 import { defaultImages } from "./defaultProfileImages";
+import { useMoralis } from "react-moralis";
 
 export const MockTopics = [
   {
@@ -46,7 +47,7 @@ export const MockTopics = [
     ],
   },
 ];
-
+//
 export const MockTopicPostsFull = [
   {
     user: {

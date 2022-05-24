@@ -16,9 +16,7 @@ const Home = () => {
   return (
     <Box>
 <LensSignInButton/>
-<Button onClick={async () => console.log(await explore())}>
 
-</Button>
       <WritePost />
       <LoadedFeed />
     </Box>

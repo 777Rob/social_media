@@ -322,7 +322,7 @@ const EXPLORE_PUBLICATIONS = `
 //     limit: number;
 //   }
 
-const explorePublications = (explorePublicationQueryRequest) => {
+export const explorePublications = (explorePublicationQueryRequest) => {
   return apolloClient.query({
     query: gql(EXPLORE_PUBLICATIONS),
     variables: {
@@ -342,7 +342,3 @@ export const explore = async () => {
 
   return result.data;
 };
-
-(async () => {
-  await explore();
-})();

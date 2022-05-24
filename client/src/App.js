@@ -29,6 +29,7 @@ import { NavbarComponent } from "./components/Navigation/Navbar/NavbarComponent"
 import "./styling/App.css";
 import Explore from "pages/Explore";
 import { theme } from "./styling/theme";
+import Advertising from "pages/Advertising";
 // Testuojam
 
 const App = () => {
@@ -103,6 +104,8 @@ const App = () => {
                 <Route path="/AccountCreation" element={<AccountCreation />} />
                 <Route path="/Rewards" element={<Rewards />} />
                 <Route path="/Communities" element={<Communities />} />
+                <Route path="/Advertising" element={<Advertising />} />
+
                 <Route path="/Explore" element={<Explore />} />
                 <Route path="/Community/:address" element={<Community />}>
                   <Route path="categories" element={<CategoriesPage />} />

@@ -3,8 +3,8 @@ import WritePost from "components/Feed/WritePost";
 import { withPosts } from "components/Loader/withPosts";
 import Feed from "../components/Feed/Feed";
 import { queryExample } from "QueryExample";
-import { authenticate } from "graphql/auth";
-import { generateChallenge } from "graphql/auth";
+import { authenticate } from "lens/authentication/auth";
+import { generateChallenge } from "lens/authentication/auth";
 import { useMoralis } from "react-moralis";
 import { explore } from "lens/explore/explore";
 

@@ -1,4 +1,4 @@
-import { apolloClient } from "./apolloClient";
+import { apolloClient } from "../../apolloClient";
 import { gql } from "@apollo/client";
 
 const AUTHENTICATION = `

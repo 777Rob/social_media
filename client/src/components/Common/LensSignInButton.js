@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Text } from "@mantine/core";
-import { authenticate, generateChallenge } from "graphql/auth";
+import { authenticate, generateChallenge } from "lens/authentication/auth";
 import { useMoralis } from "react-moralis";
 import { ethers } from "ethers";
 import { setAuthenticationToken } from "state";
@@ -34,29 +34,25 @@ const LensSignInButton = () => {
   const [error, setError] = useState();
   const [signatures, setSignatures] = useState([]);
 
-  useEffect(() => {
-    (async () => {
-      const request = await generateChallenge(account);
-      setChallange(request.data.challenge.text);
-    })();
-  }, [challange, account]);
-
 
   const handleSign = async (e) => {
     e.preventDefault();
     setError();
-    
-    const sig = await signMessage({
+    const request = await generateChallenge(account);
+    const challange = request.data.challenge.text;
+    const {message, signature, address} = await signMessage({
       setError,
       message: challange
     });
-    const authTx = await authenticate( sig.address, sig.signature)
-    console.log(authTx)
+    
+    const authTx = await authenticate( address, signature)
+
+    setAuthenticationToken(await authTx.data.authenticate.accessToken)
     localStorage.setItem("auth_token", authTx.data.authenticate.accessToken);
-    setAuthenticationToken(authTx.data.authenticate.accessToken)
     localStorage.setItem("refresh_token", authTx.data.authenticate.refreshToken);
-    if (sig) {
-      setSignatures([...signatures, sig]);
+
+    if (signature) {
+      setSignatures([...signatures, signature]);
     }
   };
 

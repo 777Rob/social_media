@@ -12,12 +12,10 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { MoonStars, Sun } from "tabler-icons-react";
 import "styling/App.css";
-import { useDispatch } from "react-redux";
-import { TOGGLE_SIDEBAR } from "redux/Community/appUtilsSlice";
+import {GiHamburgerMenu} from "react-icons/gi"
 
-export const HeaderComponent = ({ toggleColorScheme, colorScheme }) => {
+export const HeaderComponent = ({ toggleColorScheme, colorScheme, setDisplayRightSidebar, displayRightSidebar }) => {
   const theme = useMantineTheme();
-  const dispatch = useDispatch()
   const locationObject = useLocation();
   const locationName = Navigation.filter(
     (item) => locationObject.pathname == item.path
@@ -48,7 +46,14 @@ export const HeaderComponent = ({ toggleColorScheme, colorScheme }) => {
               <MoonStars size={16} />
             )}
           </ActionIcon>
-          <Button onClick={() => dispatch(TOGGLE_SIDEBAR())}>Toggle Sidebar</Button>
+          <ActionIcon
+            variant="default"
+            onClick={() => setDisplayRightSidebar(!displayRightSidebar)}
+            size={30}
+            radius="md"
+          >
+            <GiHamburgerMenu size={16}/>
+          </ActionIcon>
         </Group>
       </Group>
     </Header>

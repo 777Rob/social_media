@@ -39,7 +39,7 @@ const App = () => {
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
   const [displayRightSideBar, setDisplayRightSidebar] = useState(true);
-
+  
   if (!isAuthenticated) {
     // Page to be shown to the user that is not authenticated yet
     return <LandingPage />;
@@ -85,15 +85,17 @@ const App = () => {
             /* Navbar on the left that contains buttons that lead to other pages */
             navbar={<NavbarComponent />}
             /* Sidebar shown on the right */
-            aside={<RightSidebar display={displayRightSideBar} />}
+            aside={<RightSidebar display={displayRightSideBar} setDisplay={setDisplayRightSidebar} />}
           >
             {/* Main body of the screen */}
             <Box
               sx={{
                 marginTop: 50,
-                marginLeft: 210,
-                marginRight: 210,
-                padding: "5px",
+                marginLeft: "auto",
+                marginRight: "auto",
+                width: "1200px",
+                padding: "10px",
+
               }}
             >
               <Routes>

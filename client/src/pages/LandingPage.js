@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { ConnectButton } from "web3uikit";
 import "../styling/App.css";
 import { useViewportSize } from "@mantine/hooks";
-import { generateChallenge } from "graphql/auth";
+import { generateChallenge } from "lens/authentication/auth";
 import { useMoralis } from "react-moralis";
 
 /* 

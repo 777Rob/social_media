@@ -1,6 +1,6 @@
 
 import { gql } from '@apollo/client/core';
-import { apolloClient } from 'graphql/apolloClient';
+import { apolloClient } from 'apolloClient';
 import { prettyJSON } from 'helpers/helpers';
 
 const EXPLORE_PUBLICATIONS = `

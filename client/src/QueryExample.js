@@ -1,5 +1,5 @@
 import { gql } from '@apollo/client'
-import { apolloClient } from 'graphql/apolloClient'
+import { apolloClient } from 'apolloClient'
 const query = `
   challenge(request: $request) {
     text

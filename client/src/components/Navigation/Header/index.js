@@ -6,7 +6,7 @@ import {
   Text,
   useMantineTheme,
 } from "@mantine/core";
-import { LogoText } from "data/Logo";
+import { LogoText } from "components/Common/Logo";
 import { Navigation } from "data/Navigation";
 import React from "react";
 import { useLocation } from "react-router-dom";

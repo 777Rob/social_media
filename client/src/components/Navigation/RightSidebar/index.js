@@ -7,12 +7,20 @@ import { getRecommendedProfiles } from "lens/profile/getRecommendedProfiles";
 import SearchInput from "components/Common/Search";
 import { RecommendedProfile } from "./RecommendedProfile";
 
+// @Description: This component is used to display the right sidebar
 const RightSidebar = ({ display }) => {
+  // @Param: display: boolean
+  // If display is true, the right sidebar will be displayed
   const [recommendedProfiles, setRecommendedProfiles] = useState([]);
 
+  // Load recommended profiles
   useEffect(() => {
     (async () => {
+      // use getRecommendedProfiles function to get recommended profiles
+      // function returns a promise that resolves to an array of profiles
       const response = await getRecommendedProfiles();
+
+      // set the recommended profiles
       setRecommendedProfiles(response.data.recommendedProfiles);
     })();
   }, []);
@@ -36,6 +44,8 @@ const RightSidebar = ({ display }) => {
         {/*<CommunitiesSection />*/}
         {/*<MessagesSection />*/}
         <SearchInput />
+
+        {/* Recommended profiles */}
         <Text align="center" sx={{ fontSize: "24px", fontWeight: "600" }}>
           Recommended profiles
         </Text>

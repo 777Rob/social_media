@@ -1,21 +1,22 @@
-import { apolloClient } from '../../apolloClient';
-// this is showing you how you use it with react for example
-// if your using node or something else you can import using
-// @apollo/client/core!
+import { apolloClient } from 'apolloClient';
 import { gql } from '@apollo/client'
+
+// Following functions use apolloClient to make graphql queries and mutations to the server
+
 
 const VERIFY = `
   query($request: VerifyRequest!) {
     verify(request: $request)
   }
 `
-
+// Verify function to verify the users token
+// @Param address: address of the user to verify
 export const verify = (accessToken) => {
-   return apolloClient.query({
+  return apolloClient.query({
     query: gql(VERIFY),
     variables: {
       request: {
-         accessToken,
+        accessToken,
       },
     },
   })

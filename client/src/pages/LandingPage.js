@@ -10,7 +10,7 @@ import { useMoralis } from "react-moralis";
     Page shown to the user if the user is not authenticated.
     Provides with an ability to be authenticated using various web3 service providers.
 */
-export const LandingPage = () => {
+const LandingPage = () => {
   const { height, width } = useViewportSize();
 
   // Return a grid consisting of three maximum size rows
@@ -53,3 +53,5 @@ export const LandingPage = () => {
     </Grid>
   );
 };
+
+export default LandingPage;

@@ -8,7 +8,7 @@ import {
 } from '@apollo/client/core';
 import { onError } from '@apollo/client/link/error';
 import fetch from 'cross-fetch';
-import { LENS_API } from 'config';
+import { LENS_API } from 'lens';
 
 // Specify default options
 // Options are passed to the ApolloClient constructor
@@ -48,7 +48,7 @@ const authLink = new ApolloLink((operation, forward) => {
   // Get the authentication token from the local storage
   const authToken = localStorage.getItem("auth_token");
   console.log('jwt token:', authToken);
-  
+
   // Decode the token to get the experation date
   // const { exp } = jwtDecode(authToken)
 

@@ -11,8 +11,7 @@ import UploadButton from "components/Common/UploadFileButton";
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import { useDispatch, useSelector } from "react-redux";
 import _ from "lodash";
-import { COMMUNITY_FACTORY_ABI } from "contracts/ABI/COMMUNITY_FACTORY_ABI";
-import { COMMUNITY_FACTORY_ADDRESS } from "contracts/addresses";
+import { COMMUNITY_FACTORY_ABI, COMMUNITY_FACTORY_ADDRESS } from "contracts";
 import { useSnackbar } from "notistack";
 
 export const StepThree = () => {

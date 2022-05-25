@@ -1,20 +1,22 @@
-import { Button, Box } from "@mantine/core";
+import { Box } from "@mantine/core";
 import WritePost from "components/Feed/WritePost";
 import { withPosts } from "components/Feed/withPosts";
 import Feed from 'components/Feed';
-import { queryExample } from "QueryExample";
-import { authenticate } from "lens/authentication/auth";
-import { generateChallenge } from "lens/authentication/auth";
-import { useMoralis } from "react-moralis";
-import { explore } from "lens/explore/explore";
 
+// @Description: Home page of the app that displays the feed to the user
 const Home = () => {
-  // Load feed
+
+  // Load feed with posts by passing Feed to withPosts function 
+  // Which will query for the posts and return a component with
+  // the posts passed as props
   const LoadedFeed = withPosts(Feed);
-  // Render a section to write a post followed by a list of posts
+
   return (
     <Box>
+      {/* Write posts */}
       <WritePost />
+
+      {/* Loaded feed */}
       <LoadedFeed />
     </Box>
   );

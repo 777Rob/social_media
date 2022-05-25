@@ -1,4 +1,4 @@
-export const FOLLOW_NFT_ABI = [
+export const LENS_FOLLOW_NFT_ABI = [
   {
     inputs: [{ internalType: "address", name: "hub", type: "address" }],
     stateMutability: "nonpayable",

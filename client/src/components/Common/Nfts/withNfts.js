@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useMoralisWeb3Api } from "react-moralis";
 
 export const withNfts = (Component, address) => {
-  // HOC That takes in  a compontent and address from where to fetch nfts and passes fetched nfts as a prop to that component
+  // Function That takes in  a compontent and address from where to fetch nfts and passes fetched nfts as a prop to that component
   return (props) => {
     // Web3 Api function
     const Web3Api = useMoralisWeb3Api();

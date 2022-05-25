@@ -1,9 +1,15 @@
+import "./styling/App.css";
+import { theme } from "./styling/theme";
+import React, { useState } from "react";
+import { useMoralis } from "react-moralis";
+import { Route, Routes } from "react-router-dom";
 import {
   AppShell,
   Box,
   ColorSchemeProvider,
   MantineProvider,
 } from "@mantine/core";
+
 import CommunityCategory from "components/Communities/Category";
 import Categories from "components/Communities/Categories";
 import CommunitiesFeed from "components/Communities/Feed";
@@ -17,19 +23,14 @@ import Communities from "pages/Communities";
 import Community from "pages/Community";
 import CreateYourOwn from "pages/CreateYourOwn";
 import Home from "pages/Home";
-import { LandingPage } from "pages/LandingPage";
-import Profile from "pages/Profile";
-import ProfileEdit from "pages/ProfileEdit";
+import LandingPage from "pages/LandingPage";
+import Profile from "pages/Account/Profile";
+import ProfileEdit from "pages/Account/ProfileEdit";
 import Rewards from "pages/Rewards";
-import Settings from "pages/Settings";
-import React, { useState } from "react";
-import { useMoralis } from "react-moralis";
-import { Route, Routes } from "react-router-dom";
-import Topic from "components/Communities/Topic";
-import { NavbarComponent } from "./components/Navigation/Navbar/NavbarComponent";
-import "./styling/App.css";
+import Settings from "pages/Account/Settings";
 import Explore from "pages/Explore";
-import { theme } from "./styling/theme";
+import Topic from "components/Communities/Topic";
+import Navbar from "components/Navigation/Navbar";
 import Advertising from "pages/Advertising";
 
 const App = () => {
@@ -98,7 +99,7 @@ const App = () => {
             }
 
             /* Navbar on the left that contains buttons that lead to other pages */
-            navbar={<NavbarComponent />}
+            navbar={<Navbar />}
 
             /* Sidebar shown on the right */
             aside={<RightSidebar display={displayRightSideBar} setDisplay={setDisplayRightSidebar} />}

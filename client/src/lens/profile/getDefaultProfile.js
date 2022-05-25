@@ -89,13 +89,14 @@ query DefaultProfile($address: EthereumAddress!) {
   }
 }
 `;
-
+// Function for getting the default profile of a user
+// @Param: address - Ethereum address to get default profile for
+// returns a promise that resolves to the default profile
 export const getDefaultProfile = (address) => {
   return apolloClient.query({
     query: gql(GET_PROFILE),
     variables: {
       address: address
     }
-
   });
 };

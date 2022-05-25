@@ -3,6 +3,8 @@ import { gql } from '@apollo/client/core';
 import { apolloClient } from 'apolloClient';
 import { prettyJSON } from 'helpers/helpers';
 
+// Following functions use apolloClient to make graphql queries and mutations to the server
+
 const EXPLORE_PUBLICATIONS = `
   query($request: ExplorePublicationRequest!) {
     explorePublications(request: $request) {
@@ -317,10 +319,11 @@ const EXPLORE_PUBLICATIONS = `
   }
 `;
 
-// {
-//     sortCriteria: string;
-//     limit: number;
-//   }
+// Explore publications function:
+// @Param: explorePublicationQueryRequest object with the following properties:
+// sortCriteria: string; // Sort criteria: 
+// limit: number;
+// offset: number;
 
 export const explorePublications = (explorePublicationQueryRequest) => {
   return apolloClient.query({
@@ -331,14 +334,3 @@ export const explorePublications = (explorePublicationQueryRequest) => {
   });
 };
 
-export const explore = async () => {
-  const result = await explorePublications({
-    // switch for `TOP_COLLECTED` if you wanted collected!
-    sortCriteria: 'LATEST',
-    limit: 50,
-  });
-
-  prettyJSON('explore: result', result.data);
-
-  return result.data;
-};

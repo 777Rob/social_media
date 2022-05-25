@@ -4,18 +4,17 @@ import { useEffect, useState } from "react";
 import { search } from "lens/search/search";
 import Post from "components/Feed/PostLens";
 
-
+// @Description: The page that is used to display search results for the user
 const SearchResults = () => {
   // Get the search query from the URL
   const { query } = useParams();
-  // Set the search results to an empty array
-  // This will be populated by the useEffect hook
-  // and will be used to render the search results
 
+  // Set the search results to an empty array
+  // This will be populated in the useEffect hook
+  // and will be used to render the search results
   const [results, setResults] = useState([]);
 
   // Run the search query and set the results
-
   useEffect(() => {
     (async () => {
       // Query the lens search API for the search query
@@ -31,11 +30,12 @@ const SearchResults = () => {
     })();
   }, []);
 
-  return <Box>
+  return (<Box>
     <Text sx={{ fontSize: "30px", fontWeight: "bold" }}>Displaying search results for: {query}</Text>
 
+    {/* Map throught results */}
     {results.map((result) => <Post post={result} />)}
-  </Box>
+  </Box>)
 }
 
 export default SearchResults;

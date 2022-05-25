@@ -342,14 +342,20 @@ const GET_TIMELINE = `
     }
 `
 
+// @Params:
+// profileId - the id of the profile to get the timeline for
+// profileId is required - because a wallet can have many profiles the logged-in user must species which profileId they wish to get back on the timeline. 
+// Timeline can be used to show the user what is happening on the social feeds of people they follow and what they are liking. 
+// The timeline queries will continue to get smarter, eventually bringing in AI and data profiling. 
+// returns a promise that resolves to an array of posts, comments, and mirrors
 export const getTimeline = (profileId) => {
-    return apolloClient.query({
-        query: gql(GET_TIMELINE),
-        variables: {
-            request: {
-                profileId,
-                limit: 10
-            }
-        },
-    })
+  return apolloClient.query({
+    query: gql(GET_TIMELINE),
+    variables: {
+      request: {
+        profileId,
+        limit: 10
+      }
+    },
+  })
 }

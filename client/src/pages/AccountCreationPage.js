@@ -1,45 +1,45 @@
 import { useMoralis, useWeb3ExecuteFunction } from "react-moralis";
 import {
   Text,
-  BackgroundImage,
   Button,
-  Center,
-  Grid,
-  Checkbox,
   Stepper,
   Group,
 } from "@mantine/core";
-import { Categories } from "data/Categories/categories";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { MultiSelect } from "@mantine/core";
-import { PROFILE_CONTRACT_ABI } from "contracts/ABI/PROFILE_CONTRACT_ABI";
-import { PROFILE_CONTRACT_ADDRESS } from "contracts/addresses";
-import { DatePicker, Input, Form } from "web3uikit";
+import { PROFILE_CONTRACT_ABI, PROFILE_CONTRACT_ADDRESS } from "contracts";
 import { useSnackbar } from "notistack";
-import ChangeNetwork from "components/Common/ChangeNetwork";
 
+import StepThree from "components/Account/CreationSteps/StepThree";
+import StepFour from "components/Account/CreationSteps/StepFour";
+import StepOne from "components/Account/CreationSteps/StepOne";
+import StepTwo from "components/Account/CreationSteps/StepTwo";
+
+// @Description: This page is the wizard used for creating an account
 const AccountCreation = () => {
   const { Moralis } = useMoralis();
-  // User object
+
+  // Get current user object
   const user = Moralis.User.current();
 
-  // Current page
+  // Set state of an active page to 0
   const [active, setActive] = useState(0);
 
   // Categories from step1
   const [selectedCategories, setSelectedCategories] = useState([]);
+
   // For making contract calls
   const contractProcessor = useWeb3ExecuteFunction();
 
-  // Notifications
+  // get enqueSnackbar from notistack to show notifications
   const { enqueueSnackbar } = useSnackbar();
 
+  // Get navigate function from react-router-dom to navigate to other pages
   const navigate = useNavigate();
 
-  // Function for making contract call
+  // Function for making contract call to create account
   const mintProfile = async () => {
-    // Call options
+    // Call options for contract call
     let options = {
       contractAddress: PROFILE_CONTRACT_ADDRESS,
       abi: PROFILE_CONTRACT_ABI,
@@ -51,7 +51,7 @@ const AccountCreation = () => {
       msgValue: Moralis.Units.ETH(0),
     };
 
-    // Call
+    // Call contract
     await contractProcessor.fetch({
       params: options,
       onSuccess: async () => {
@@ -73,27 +73,35 @@ const AccountCreation = () => {
     });
   };
 
-  // Go to next step
+  // Function for going to the next step
   const nextStep = async () => {
-    console.log(active);
+
     // If it is the last step mint profile and navigate home
     if (active === 4) {
       console.log("Subbmiting contract interaction");
       mintProfile();
     }
+
+    // Else go to next step
     // Check if user selected atleast 1 category
     if (active === 0 && selectedCategories.length < 0) {
+
       alert("Please select atleast 1 category");
     } else if (active === 0 && selectedCategories.length > 0) {
-      // Save category
+      // Set user interest categories to selected categories
       user.set("interestCategories", selectedCategories);
+
+      //Save changes in user in Moralis database and navigate to next step
       await user.save();
       setActive(active + 1);
+
     } else {
+      // Navigate to next setp
       setActive(active + 1);
     }
   };
-  // Go Back
+
+  // Function for going back to previous step
   const prevStep = () =>
     setActive((current) => (current > 0 ? current - 1 : current));
 
@@ -104,137 +112,10 @@ const AccountCreation = () => {
       </Text>
 
       <Stepper active={active} onStepClick={setActive} breakpoint="sm">
-        {/* Step 1 */}
-        <Stepper.Step
-          label="First step"
-          description="Select topic you are interested in"
-        >
-          Select topic you are interested in.
-          {/* <Grid>
-        {Categories.map((category) => (
-          <Grid.item span={3}>
-            <BackgroundImage
-              src={category.image}
-              radius="md"
-              alt={category.name}
-              placeholder={<Text align="center">{category.name}</Text>}
-              withPlaceholder
-            >
-              <Center p="md">
-                <Checkbox label="I agree to sell my privacy" />
-                <Text sx={{ width: "400px" }} align="center">
-                  {category.name}
-                </Text>
-              </Center>
-            </BackgroundImage>
-          </Grid.item>
-        ))}
-      </Grid> */}
-          <MultiSelect
-            data={Categories.map((category, i) => ({
-              value: i,
-              label: (
-                <Text>
-                  {category.icon}
-                  {category.name}
-                </Text>
-              ),
-            }))}
-            value={selectedCategories}
-            onChange={setSelectedCategories}
-            label="Pick categories you would like to follow:"
-            placeholder="Pick all that you like"
-          />
-        </Stepper.Step>
-
-        {/* Step 2 */}
-
-        <Stepper.Step label="Second step" description="Select your user name">
-          <Text
-            sx={{ fontWeight: "bold", fontSize: "18px", marginBottom: "20px" }}
-          >
-            Select your user name:
-          </Text>
-          <Input
-            label="User name"
-            name="User name"
-            prefixIcon="cube"
-            width="70%"
-          />
-        </Stepper.Step>
-
-        {/* Step 3 */}
-
-        <Stepper.Step label="Third step" description="Complete profile">
-          <Text
-            sx={{ fontWeight: "bold", fontSize: "18px", marginBottom: "20px" }}
-          >
-            Complete profile information
-          </Text>
-          {/* <Input label="Website" name="Website" prefixIcon="cube" width="70%" />
-          <Input label="Bio" name="Bio" prefixIcon="cube" width="70%" />
-          <DatePicker
-            id="date-picker"
-            onChange={function noRefCheck() {}}
-          />{" "} */}
-          {/* Form  */}
-          <Form
-            buttonConfig={{
-              onClick: function noRefCheck() {},
-              theme: "primary",
-            }}
-            data={[
-              {
-                inputWidth: "100%",
-                name: "First name",
-                type: "text",
-                value: "",
-              },
-              {
-                inputWidth: "100%",
-                name: "Last name",
-                type: "text",
-                value: "",
-              },
-              {
-                inputWidth: "100%",
-                name: "Email address",
-                type: "email",
-                validation: {
-                  regExp: "^[^@s]+@[^@s]+.[^@s]+$",
-                },
-                value: "",
-              },
-              {
-                name: "Birthday",
-                type: "date",
-                value: "Enter your birthday date",
-              },
-              {
-                inputWidth: "100%",
-                name: "Your Bio",
-                type: "textarea",
-                validation: {
-                  required: true,
-                },
-                value: "",
-              },
-            ]}
-            onSubmit={function noRefCheck() {}}
-            title="Your Profile"
-          />
-        </Stepper.Step>
-
-        {/* Step 4 */}
-
-        <Stepper.Step
-          label="Fourth step"
-          description="Configure reward settings"
-        >
-          Offer user to opt-in for advertising of a products that user can be
-          intersested in and configure earning profile and select how many ads
-          user wants to receive if at all
-        </Stepper.Step>
+        <StepOne selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} />
+        <StepTwo />
+        <StepThree />
+        <StepFour />
         <Stepper.Completed>
           Completed, click back button to get to previous step
         </Stepper.Completed>
@@ -247,7 +128,7 @@ const AccountCreation = () => {
           Back
         </Button>
         <Button onClick={nextStep}>
-          {active != 4 ? (
+          {active !== 4 ? (
             <Text>Next step</Text>
           ) : (
             <Text>Complete and mint profile NFT</Text>
@@ -256,6 +137,8 @@ const AccountCreation = () => {
       </Group>
     </div>
   );
+
 };
 
 export default AccountCreation;
+

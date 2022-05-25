@@ -5,9 +5,11 @@ import { FiSettings, FiMessageSquare } from "react-icons/fi";
 import { SiAzuredataexplorer } from "react-icons/si";
 import { MdNotifications } from "react-icons/md";
 import { FcAdvertising } from "react-icons/fc";
-
 import { FaGlobe } from "react-icons/fa";
-// @TODO: Change Icons maybe use web3uikit
+
+// @Description: This array consist objects that contain the 
+// icon and the name and path to redirect on click of the button
+// in the navbar
 export const Navigation = [
   {
     name: "Home",

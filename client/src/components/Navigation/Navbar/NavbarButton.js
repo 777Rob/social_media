@@ -1,8 +1,8 @@
 import {
-    Group,
-    Text,
-    ThemeIcon,
-    UnstyledButton,
+  Group,
+  Text,
+  ThemeIcon,
+  UnstyledButton,
 } from "@mantine/core";
 import React from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
   Button component to be put into the Navbar
   Takes as parameters its icon, color, name (text on the button) and path (where to redirect on click)
 */
-export const NavbarComponentButton = ({ icon, color, name, path }) => {
+const NavbarButton = ({ icon, color, name, path }) => {
   const navigate = useNavigate();
   return (
     <UnstyledButton
@@ -43,3 +43,4 @@ export const NavbarComponentButton = ({ icon, color, name, path }) => {
     </UnstyledButton>
   );
 };
+export default NavbarButton;

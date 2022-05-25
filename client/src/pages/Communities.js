@@ -5,15 +5,22 @@ import {
   Text,
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
-import {useMoralis} from "react-moralis";
+import { useMoralis } from "react-moralis";
 import { withNfts } from "components/Common/Nfts/withNfts";
 import { UserNfts } from "components/Communities/Landing/UserNfts";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
+// @Description: Landing page for communities that is shown before selecting any specific category
 const Communities = () => {
-  const {account} = useMoralis();
+  // Get the current user wallet address
+  const { account } = useMoralis();
+
+  // Pass UserNfts and the account component to withNfts function 
+  // which will return a UserNfts component with the nfts passed as an prop
   const UserNftsWithLoader = withNfts(UserNfts, account)
-const navigate = useNavigate();
+
+  // Get navigate function from react-router-dom to navigate to other pages
+  const navigate = useNavigate();
 
   return (
     <Box>
@@ -46,14 +53,20 @@ const navigate = useNavigate();
       >
         You haven't joined any communities ....
       </Text>
-        <Button sx={{height: "100px"}} fullWidth onClick={() => navigate("/community/mock")}>
-          Mock community
-        </Button>
+
+      {/* Temp mock community */}
+      <Button sx={{ height: "100px" }} fullWidth onClick={() => navigate("/community/mock")}>
+        Mock community
+      </Button>
+
+      {/* Available communities */}
       <Text align="center" sx={{ fontSize: "30px", fontWeight: "500" }}>
         Available Communities
       </Text>
       <Divider my="xs" />
       <UserNftsWithLoader />
+
+      {/* Explore section */}
       <Text align="center" sx={{ fontSize: "30px", fontWeight: "500" }}>
         Explore communities based on your interests
       </Text>

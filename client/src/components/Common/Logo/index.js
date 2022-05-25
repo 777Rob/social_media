@@ -1,9 +1,11 @@
 import { Text, useMantineTheme } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-
+// @Description: This component is used to display the logo
+// @Props:
+// size: - width and height of the logo passed to svg
+// sx - styles passed to the logo
 export const Logo = ({ size, sx }) => {
-  //
-  const theme = useMantineTheme();
+
 
   return (
     <svg
@@ -206,10 +208,22 @@ export const Logo = ({ size, sx }) => {
   );
 };
 
-export const LogoText = ({ size, sx }) => {
-  const navigate = useNavigate();
+
+// @Description: This component is used to display the logo and the name of the
+// application changes depending on the current theme navigates to the home page on click
+// @Props:
+// size: - width and height of the logo passed to svg
+// sx - styles passed to the logo
+// navigate - shoud user be redirected to home page on click default is true
+export const LogoText = ({ size, sx }, navigate = true) => {
+  // navigate function from useNavigate hook used to redirect the user
+  const navigatefunc = useNavigate();
+
+  // Get current theme
+  // it will be used to change the logo and the name of the application colors
   const theme = useMantineTheme();
-console.log(theme)
+
+
   return (
     <Text
       sx={{
@@ -219,7 +233,7 @@ console.log(theme)
         fontSize: "25px",
         color: theme.colorScheme == "light" ? theme.colors.dark[7] : theme.colors.indigo[1]
       }}
-      onClick={() => navigate("/")}
+      onClick={() => navigate && navigatefunc("/")}
     >
       <Logo size={size || "45px"} />
       Parsedia

@@ -41,6 +41,8 @@ const RECOMMENDED_PROFILES = `
   }
 `
 
+// Function to get recommended profiles from the server
+// Returns a promise that resolves to an array of profiles
 export const getRecommendedProfiles = () => {
   return apolloClient.query({
     query: gql(RECOMMENDED_PROFILES),

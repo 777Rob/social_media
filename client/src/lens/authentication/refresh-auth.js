@@ -1,8 +1,8 @@
-import { apolloClient } from '../../apolloClient';
-// this is showing you how you use it with react for example
-// if your using node or something else you can import using
-// @apollo/client/core!
+import { apolloClient } from 'apolloClient';
 import { gql } from '@apollo/client'
+
+// Following functions use apolloClient to make graphql queries and mutations directly to the server
+
 
 const REFRESH_AUTHENTICATION = `
   mutation($request: RefreshRequest!) { 
@@ -13,8 +13,10 @@ const REFRESH_AUTHENTICATION = `
  }
 `
 
+// Refresh authentication function to refresh the authentication token
+// @Param refreshToken: refresh token of the user
 export const refreshAuth = (refreshToken) => {
-   return apolloClient.mutate({
+  return apolloClient.mutate({
     mutation: gql(REFRESH_AUTHENTICATION),
     variables: {
       request: {

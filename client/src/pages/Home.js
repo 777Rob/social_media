@@ -15,8 +15,6 @@ const Home = () => {
   // Render a section to write a post followed by a list of posts
   return (
     <Box>
-<LensSignInButton/>
-
       <WritePost />
       <LoadedFeed />
     </Box>

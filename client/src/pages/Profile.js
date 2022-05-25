@@ -3,6 +3,7 @@ import { Box, Text, Button, Image } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { CopyButton } from "web3uikit";
 import Avatar from "components/Common/Avatar"
+import { useEffect, useState } from "react";
 
 const Profile = () => {
   const { Moralis, account } = useMoralis();
@@ -11,6 +12,7 @@ const Profile = () => {
 
   return (
     <Box>
+
       <Box
         sx={{
           display: "flex",

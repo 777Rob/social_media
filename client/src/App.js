@@ -7,6 +7,7 @@ import {
 import CommunityCategory from "components/Communities/CommunityCategory";
 import CategoriesPage from "components/Communities/CategoriesPage";
 import CommunitiesFeed from "components/Communities/CommunitiesFeed";
+import SearchResults from "pages/SearchResults";
 import CommunitiesLatest from "components/Communities/CommunitiesLatest";
 import DisplayTopics from "components/Communities/DisplayTopics";
 import { HeaderComponent } from "components/Navigation/HeaderComponent";
@@ -91,9 +92,9 @@ const App = () => {
             <Box
               sx={{
                 marginTop: 50,
-                marginLeft: "auto",
-                marginRight: "auto",
-                width: "1200px",
+marginLeft: "auto",
+                marginRight: "150px",
+                width: "1000px",
                 padding: "10px",
 
               }}
@@ -107,7 +108,7 @@ const App = () => {
                 <Route path="/Rewards" element={<Rewards />} />
                 <Route path="/Communities" element={<Communities />} />
                 <Route path="/Advertising" element={<Advertising />} />
-
+                <Route path="/Search/:query" element={<SearchResults/>}/>
                 <Route path="/Explore" element={<Explore />} />
                 <Route path="/Community/:address" element={<Community />}>
                   <Route path="categories" element={<CategoriesPage />} />

@@ -38,8 +38,8 @@ const Post = ({ post }) => {
 
       {/* Second row contains post text */}
       <Grid.Col span={12} className="post--content">
-        <Text size="md">{post.metadata.name}</Text>
-        <Text size="md">{post.metadata.content}</Text>
+        <Text size="md">{post.metadata?.name || ""}</Text>
+        <Text size="md">{post.metadata?.content || ""}</Text>
       </Grid.Col>
 
       {/* Footer with various buttons */}
@@ -87,12 +87,5 @@ const Post = ({ post }) => {
   );
 };
 
-/*
-              {post.attributes.createdAt.toLocaleString("en-GB", {
-                dateStyle: "medium",
-                timeStyle: "medium",
-                hour12: false,
-              })}
-              */
 
 export default Post;

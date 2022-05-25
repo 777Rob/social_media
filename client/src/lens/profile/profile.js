@@ -1,100 +1,63 @@
-import { apolloClient } from 'apolloClient';
+import { apolloClient } from "apolloClient";
 // this is showing you how you use it with react for example
 // if your using node or something else you can import using
 // @apollo/client/core!
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client/core';
 
-const GET_DEFAULT_PROFILES = `
-  query($request: DefaultProfileRequest!) {
-    defaultProfile(request: $request) {
-      id
-      name
-      bio
-      attributes {
-        displayType
-        traitType
-        key
-        value
-      }
-      metadata
-      isDefault
-      picture {
-        ... on NftImage {
-          contractAddress
-          tokenId
-          uri
-          verified
+export const GET_PROFILE = gql`
+  query Profile($request: ProfileQueryRequest!) {
+    profiles(request: $request) {
+      items {
+        id
+        handle
+        ownedBy
+        name
+        attributes {
+          key
+          value
         }
-        ... on MediaSet {
-          original {
-            url
-            mimeType
-          }
+        bio
+        stats {
+          totalFollowers
+          totalFollowing
+          totalPosts
+          totalComments
+          totalMirrors
         }
-        __typename
-      }
-      handle
-      coverPicture {
-        ... on NftImage {
-          contractAddress
-          tokenId
-          uri
-          verified
-        }
-        ... on MediaSet {
-          original {
-            url
-            mimeType
-          }
-        }
-        __typename
-      }
-      ownedBy
-      dispatcher {
-        address
-        canUseRelay
-      }
-      stats {
-        totalFollowers
-        totalFollowing
-        totalPosts
-        totalComments
-        totalMirrors
-        totalPublications
-        totalCollects
-      }
-      followModule {
-        ... on FeeFollowModuleSettings {
-          type
-          amount {
-            asset {
-              symbol
-              name
-              decimals
-              address
+        picture {
+          ... on MediaSet {
+            original {
+              url
             }
-            value
           }
-          recipient
+          ... on NftImage {
+            uri
+          }
         }
-        ... on ProfileFollowModuleSettings {
-         type
+        coverPicture {
+          ... on MediaSet {
+            original {
+              url
+            }
+          }
         }
-        ... on RevertFollowModuleSettings {
-         type
+        followModule {
+          __typename
         }
       }
     }
   }
 `;
 
-export const getDefaultProfile = (ethereumAddress) => {
-   return apolloClient.query({
-    query: gql(GET_DEFAULT_PROFILES),
-    variables: {
+export const getProfile = async (username) => {
+  const result = await apolloClient.query({
+    query: gql(GET_PROFILE),
+    variables:{
       request: {
-        ethereumAddress
+        limit: 1
       }
-    },
-  })
-}
+    }
+
+  });
+  return result
+};

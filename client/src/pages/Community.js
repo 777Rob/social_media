@@ -1,7 +1,5 @@
 import { Button, Tabs, Text, Box, Group } from "@mantine/core";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
-import CategoriesPage from "components/Communities/CategoriesPage";
-import CommunitiesFeed from "components/Communities/CommunitiesFeed";
 
 const Community = () => {
   // TODO: ADD LOGIC TO CHECK IF MEMBER
@@ -27,8 +25,8 @@ const Community = () => {
         <Button onClick={() => navigate("categories")}>Categories</Button>
         <Button onClick={() => navigate("feed")}>Feed</Button>
       </Group>
-      <Box sx={{padding: "40px", paddingTop: "0px"}}>
-      <Outlet />
+      <Box sx={{ padding: "40px", paddingTop: "0px" }}>
+        <Outlet />
       </Box>
     </Box>
   );

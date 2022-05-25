@@ -6,8 +6,8 @@ import {
 } from "@mantine/core";
 import React, { useEffect, useState } from "react";
 import {useMoralis} from "react-moralis";
-import { withNfts } from "components/Loader/withNfts";
-import { UserNfts } from "components/Communities/UserNfts";
+import { withNfts } from "components/Common/Nfts/withNfts";
+import { UserNfts } from "components/Communities/Landing/UserNfts";
 import {useNavigate} from "react-router-dom"
 
 const Communities = () => {

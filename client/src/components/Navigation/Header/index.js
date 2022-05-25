@@ -12,9 +12,9 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import { MoonStars, Sun } from "tabler-icons-react";
 import "styling/App.css";
-import {GiHamburgerMenu} from "react-icons/gi"
+import { GiHamburgerMenu } from "react-icons/gi"
 
-export const HeaderComponent = ({ toggleColorScheme, colorScheme, setDisplayRightSidebar, displayRightSidebar }) => {
+const HeaderComponent = ({ toggleColorScheme, colorScheme, setDisplayRightSidebar, displayRightSidebar }) => {
   const theme = useMantineTheme();
   const locationObject = useLocation();
   const locationName = Navigation.filter(
@@ -52,10 +52,12 @@ export const HeaderComponent = ({ toggleColorScheme, colorScheme, setDisplayRigh
             size={30}
             radius="md"
           >
-            <GiHamburgerMenu size={16}/>
+            <GiHamburgerMenu size={16} />
           </ActionIcon>
         </Group>
       </Group>
     </Header>
   );
 };
+
+export default HeaderComponent;

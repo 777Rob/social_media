@@ -4,14 +4,14 @@ import {
   ColorSchemeProvider,
   MantineProvider,
 } from "@mantine/core";
-import CommunityCategory from "components/Communities/CommunityCategory";
-import CategoriesPage from "components/Communities/CategoriesPage";
-import CommunitiesFeed from "components/Communities/CommunitiesFeed";
+import CommunityCategory from "components/Communities/Category";
+import Categories from "components/Communities/Categories";
+import CommunitiesFeed from "components/Communities/Feed";
 import SearchResults from "pages/SearchResults";
-import CommunitiesLatest from "components/Communities/CommunitiesLatest";
-import DisplayTopics from "components/Communities/DisplayTopics";
-import { HeaderComponent } from "components/Navigation/HeaderComponent";
-import { RightSidebar } from "components/Navigation/RightSidebar/RightSidebarComponent";
+import Latest from "components/Communities/Latest";
+import DisplayTopics from "components/Communities/Topic/DisplayTopics";
+import Header from "components/Navigation/Header";
+import RightSidebar from "components/Navigation/RightSidebar";
 import AccountCreation from "pages/AccountCreationPage";
 import Communities from "pages/Communities";
 import Community from "pages/Community";
@@ -25,23 +25,29 @@ import Settings from "pages/Settings";
 import React, { useState } from "react";
 import { useMoralis } from "react-moralis";
 import { Route, Routes } from "react-router-dom";
-import CommunityTopic from "components/Communities/CommunityTopic";
+import Topic from "components/Communities/Topic";
 import { NavbarComponent } from "./components/Navigation/Navbar/NavbarComponent";
 import "./styling/App.css";
 import Explore from "pages/Explore";
 import { theme } from "./styling/theme";
 import Advertising from "pages/Advertising";
-// Testuojam
 
 const App = () => {
   const { isAuthenticated, user } = useMoralis();
+
+  // Set initial state for the color scheme to light
   const [colorScheme, setColorScheme] = useState("light");
+
+  // Change the color scheme to opposite of the current one
   const toggleColorScheme = (value) =>
     setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
 
+  // Set initial state for the displayRightSidebar to true
   const [displayRightSideBar, setDisplayRightSidebar] = useState(true);
-  
+
+  // If the user is not authenticated, display the landing page
   if (!isAuthenticated) {
+
     // Page to be shown to the user that is not authenticated yet
     return <LandingPage />;
   } else {
@@ -54,15 +60,21 @@ const App = () => {
     }
     */
     return (
+
+      // Color scheme provider used to change the color scheme of the app
       <ColorSchemeProvider
         colorScheme={colorScheme}
         toggleColorScheme={toggleColorScheme}
       >
+
+        {/* Mantine provider used for theming */}
         <MantineProvider
           theme={{ ...theme, colorScheme: colorScheme }}
           withGlobalStyles
           withNormalizeCSS
         >
+
+          {/* App shell with header and two sidebars that wrap the app */}
           <AppShell
             padding="xs"
             margin="xs"
@@ -74,31 +86,37 @@ const App = () => {
                     : theme.colors.gray[0],
               },
             })}
+
             /* What is always show at the top of every page */
             header={
-              <HeaderComponent
+              <Header
                 colorScheme={colorScheme}
                 displayRightSidebar={displayRightSideBar}
                 toggleColorScheme={toggleColorScheme}
                 setDisplayRightSidebar={setDisplayRightSidebar}
               />
             }
+
             /* Navbar on the left that contains buttons that lead to other pages */
             navbar={<NavbarComponent />}
+
             /* Sidebar shown on the right */
             aside={<RightSidebar display={displayRightSideBar} setDisplay={setDisplayRightSidebar} />}
           >
+
             {/* Main body of the screen */}
             <Box
               sx={{
                 marginTop: 50,
-marginLeft: "auto",
+                marginLeft: "auto",
                 marginRight: "150px",
                 width: "1000px",
                 padding: "10px",
 
               }}
             >
+
+              {/* Routes */}
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/profile" element={<Profile />} />
@@ -108,12 +126,12 @@ marginLeft: "auto",
                 <Route path="/Rewards" element={<Rewards />} />
                 <Route path="/Communities" element={<Communities />} />
                 <Route path="/Advertising" element={<Advertising />} />
-                <Route path="/Search/:query" element={<SearchResults/>}/>
+                <Route path="/Search/:query" element={<SearchResults />} />
                 <Route path="/Explore" element={<Explore />} />
                 <Route path="/Community/:address" element={<Community />}>
-                  <Route path="categories" element={<CategoriesPage />} />
-                  <Route path="topic/:topic" element={<CommunityTopic />} />
-                  <Route path="" element={<CommunitiesLatest />} />
+                  <Route path="categories" element={<Categories />} />
+                  <Route path="topic/:topic" element={<Topic />} />
+                  <Route path="" element={<Latest />} />
                   <Route path="feed" element={<CommunitiesFeed />} />
                   <Route
                     path="categories/:category"

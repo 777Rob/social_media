@@ -1,16 +1,18 @@
 import { Box, Button, Divider } from "@mantine/core";
 import WritePost from "components/Feed/WritePost";
 import Feed from "components/Feed";
-import { withPosts } from "components/Loader/withPosts";
+import { withPosts } from "components/Feed/withPosts";
 
-const CommunitiesFeed = () => {
+const Index = () => {
+  // Load feed using the withPosts HOC and pass the Feed component as the component to load
   const PostsLoaded = withPosts(Feed);
+
   return (
     <Box>
       <WritePost />
-      <PostsLoaded/>
+      <PostsLoaded />
     </Box>
   );
 };
 
-export default CommunitiesFeed;
+export default Index;

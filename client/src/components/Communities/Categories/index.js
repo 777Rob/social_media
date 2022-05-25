@@ -8,8 +8,8 @@ import {
   Divider,
 } from "@mantine/core";
 import { SplitScreen } from "components/Common/SplitScreen";
-import { withCommunityTopics } from "components/Loader/withCommunityTopics";
-import { withCommunityCategories } from "components/Loader/withCommunityCategories";
+import { withCommunityTopics } from "components/Communities/Topic/withCommunityTopics";
+import { withCommunityCategories } from "components/Communities/Category/withCommunityCategories";
 import { useNavigate } from "react-router-dom";
 
 const LatestTopicList = ({ topics }) => {

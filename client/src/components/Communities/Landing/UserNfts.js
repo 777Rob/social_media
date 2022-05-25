@@ -8,7 +8,7 @@ import {
 import React from "react";
 import _ from "lodash";
 import CreateYourOwn from "data/CreateYourOwn.jpg";
-import { NftCard } from "components/Common/NftCard";
+import { NftCard } from "components/Common/Nfts/NftCard";
 import { useNavigate } from "react-router-dom";
 
 export const UserNfts = ({ nfts }) => {

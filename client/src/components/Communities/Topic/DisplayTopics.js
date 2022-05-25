@@ -1,11 +1,16 @@
 import { Table, Image, Avatar } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
-import {useParams} from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 const DisplayTopics = ({ topics = [] }) => {
+  // Get navigate function from react-router-dom useNavigate hook
+  // This is used to navigate to the topic page
   const navigate = useNavigate();
-  const {address} = useParams();
 
+  // Get the community address from the URL
+  const { address } = useParams();
+
+  // Get the rows for table of topics
   const rows = topics.map((element) => (
     <tr
       key={element.topic}
@@ -24,8 +29,10 @@ const DisplayTopics = ({ topics = [] }) => {
     </tr>
   ));
 
+  // Render the table of topics
   return (
     <Table verticalSpacing="md" fontSize="lg" striped highlightOnHover>
+      {/* Header */}
       <thead>
         <tr>
           <th>Topic</th>
@@ -35,6 +42,8 @@ const DisplayTopics = ({ topics = [] }) => {
           <th>Activity</th>
         </tr>
       </thead>
+
+      {/* Body */}
       <tbody>{rows && rows}</tbody>
     </Table>
   );

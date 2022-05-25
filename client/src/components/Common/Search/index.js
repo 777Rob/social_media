@@ -3,7 +3,7 @@ import { Box, Button, TextInput } from "@mantine/core";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const SearchInput = () => {
+const Index = () => {
   const [input, setInput] = useState("");
   const navigate = useNavigate();
 
@@ -16,4 +16,4 @@ const SearchInput = () => {
   </Box>);
 };
 
-export default SearchInput;
+export default Index;

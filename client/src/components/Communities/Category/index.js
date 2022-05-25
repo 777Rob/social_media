@@ -1,14 +1,14 @@
 import { Box } from "@mantine/core";
-import { withCommunityTopics } from "components/Loader/withCommunityTopics";
+import { withCommunityTopics } from "components/Communities/Topic/withCommunityTopics";
 import { useParams } from "react-router-dom";
-import DisplayTopics from "./DisplayTopics";
+import DisplayTopics from "components/Communities/Topic/DisplayTopics";
 
 const CommunityCategory = () => {
-    const {address, category} = useParams();
+    const { address, category } = useParams();
     console.log(address, category)
-    const LoadedCommunityCategory = withCommunityTopics(DisplayTopics, {query: "GET_CATEGORY_TOPICS", category: category, community: address})
+    const LoadedCommunityCategory = withCommunityTopics(DisplayTopics, { query: "GET_CATEGORY_TOPICS", category: category, community: address })
     return <Box>
-<LoadedCommunityCategory/>
+        <LoadedCommunityCategory />
     </Box>
 }
 

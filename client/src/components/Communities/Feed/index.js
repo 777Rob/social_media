@@ -1,6 +1,6 @@
 import { Box, Button, Divider } from "@mantine/core";
 import WritePost from "components/Feed/WritePost";
-import Feed from "components/Feed/Feed";
+import Feed from "components/Feed";
 import { withPosts } from "components/Loader/withPosts";
 
 const CommunitiesFeed = () => {

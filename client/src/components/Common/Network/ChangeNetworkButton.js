@@ -1,20 +1,20 @@
 import { useMoralis } from "react-moralis";
 import { Button, Text } from "@mantine/core";
 
-// Button for changing network
-const ChangeNetworkButton = () => {
-    const { Moralis, chainId } = useMoralis();
+// @Description: Button for changing network
+// @param switchToNetworkChainId: Chain id of the network to switch to default is 137 (Polygon Mainnet)
+const ChangeNetworkButton = (switchToNetworkChainId = 137) => {
+	const { Moralis, chainId } = useMoralis();
 
-    // Switch to polygon
-    const switchNetwork = async () => {
-        const chainId = 137; //Polygon Mainnet
-        await Moralis.switchNetwork(chainId);
-    };
+	// Network switch function
+	const switchNetwork = async () => {
+		// Check if the user is already on the desired network
+		if (chainId !== switchToNetworkChainId) {
+			// Switch to the desired network
+			await Moralis.switchNetwork(switchToNetworkChainId);
+		}
+	};
 
-    return (
-        <Text>
-            <Button onClick={() => switchNetwork()}>Switch Network</Button>
-        </Text>
-    );
+	return <Button onClick={() => switchNetwork()}>Switch Network</Button>;
 };
 export default ChangeNetworkButton;

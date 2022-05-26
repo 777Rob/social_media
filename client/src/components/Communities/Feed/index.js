@@ -4,15 +4,15 @@ import Feed from "components/Feed";
 import { withPosts } from "components/Feed/withPosts";
 
 const Index = () => {
-  // Load feed using the withPosts HOC and pass the Feed component as the component to load
-  const PostsLoaded = withPosts(Feed);
+	// Load feed using the withPosts HOC and pass the Feed component as the component to load
+	const PostsLoaded = withPosts(Feed);
 
-  return (
-    <Box>
-      <WritePost />
-      <PostsLoaded />
-    </Box>
-  );
+	return (
+		<Box>
+			<WritePost />
+			<PostsLoaded />
+		</Box>
+	);
 };
 
 export default Index;

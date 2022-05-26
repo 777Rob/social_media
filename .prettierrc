@@ -1,5 +1,7 @@
 {
   "tabWidth": 2,
-  "useTabs": false,
-  "width": 300
+  "useTabs": true,
+  "width": 150,
+  "arrowParens": "avoid",
+  "proseWrap": "always"
 }

@@ -5,24 +5,26 @@ import { withCommunityTopics } from "components/Communities/Topic/withCommunityT
 import CommunitiesFeed from "./CommunitiesFeed";
 
 const CommunityLanding = () => {
-  // Pass the display topics component to the withCommunityTopics HOC with GET_LATEST_TOPICS as the query
-  const LatestTopicsPageLoaded = withCommunityTopics(DisplayTopics, {query: "GET_LATEST_TOPICS"});
+	// Pass the display topics component to the withCommunityTopics HOC with GET_LATEST_TOPICS as the query
+	const LatestTopicsPageLoaded = withCommunityTopics(DisplayTopics, {
+		query: "GET_LATEST_TOPICS",
+	});
 
-  return (
-    <Text>
-      <Tabs grow position="center" variant="outline">
-        <Tabs.Tab label="Latest">
-          <LatestTopicsPageLoaded />
-        </Tabs.Tab>
-        <Tabs.Tab label="Categories">
-          <CategoriesPage />
-        </Tabs.Tab>
-        <Tabs.Tab label="Feed">
-          <CommunitiesFeed />
-        </Tabs.Tab>
-      </Tabs>
-    </Text>
-  );
+	return (
+		<Text>
+			<Tabs grow position="center" variant="outline">
+				<Tabs.Tab label="Latest">
+					<LatestTopicsPageLoaded />
+				</Tabs.Tab>
+				<Tabs.Tab label="Categories">
+					<CategoriesPage />
+				</Tabs.Tab>
+				<Tabs.Tab label="Feed">
+					<CommunitiesFeed />
+				</Tabs.Tab>
+			</Tabs>
+		</Text>
+	);
 };
 
 export default CommunityLanding;

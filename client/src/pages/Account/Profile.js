@@ -2,9 +2,8 @@ import { useMoralis } from "react-moralis";
 import { Box, Text, Button, Image } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 import { CopyButton } from "web3uikit";
-import Avatar from "components/Common/Avatar"
+import Avatar from "components/Common/Avatar";
 import { useEffect, useState } from "react";
-
 
 //@Description: Profile page is used to display the user's profile
 const Profile = () => {
@@ -23,7 +22,7 @@ const Profile = () => {
           display: "flex",
           alignItems: "center",
           flexDirection: "column",
-          justifyContent: "center"
+          justifyContent: "center",
         }}
       >
         {/* Banner */}
@@ -42,9 +41,7 @@ const Profile = () => {
         />
 
         {/* Avatar */}
-        <Avatar
-          src={user.attributes.profileImage}
-        />
+        <Avatar src={user.attributes.profileImage} />
 
         {/* Username */}
         <Text>{user.attributes.userName}</Text>
@@ -54,16 +51,19 @@ const Profile = () => {
           {account}
           <CopyButton text={account} revertIn={6500} />
         </Text>
-        <Text>
-          {user.attributes.bio}
-        </Text>
+        <Text>{user.attributes.bio}</Text>
 
         {/* Navigate to profile edit page */}
         <Button
           radius="md"
           variant="gradient"
           gradient={{ from: "indigo", to: "cyan" }}
-          sx={{ width: "200px", marginLeft: "auto", marginRight: "0px", marginTop: "10px" }}
+          sx={{
+            width: "200px",
+            marginLeft: "auto",
+            marginRight: "0px",
+            marginTop: "10px",
+          }}
           onClick={() => {
             navigate("/profile/edit");
           }}

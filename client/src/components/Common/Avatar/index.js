@@ -38,7 +38,11 @@ const LoadAvatar = ({ userId, props }) => {
 const Avatar = ({ userId, props, src }) => {
 	// Given specific user returns avatar for that user
 	// Else returns avatar of an current user
-	const { Moralis } = useMoralis();
+	const { Moralis, isAuthenticated } = useMoralis();
+
+	if (!isAuthenticated) {
+		return <AvatarMantine radius="x" />;
+	}
 	if (userId !== undefined) {
 		return <LoadAvatar userId={userId} {...props} />;
 	}

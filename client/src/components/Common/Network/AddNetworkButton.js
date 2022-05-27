@@ -10,6 +10,7 @@ const defaultNetwork = {
 	rpcUrl: "https://rpc-mainnet.matic.network", // RPC url for the network
 	blockExplorerUrl: "https://polygonscan.com/", // Block explorer url for the network
 };
+
 const AddNetworkButton = (network = defaultNetwork) => {
 	const { Moralis } = useMoralis();
 
@@ -29,6 +30,10 @@ const AddNetworkButton = (network = defaultNetwork) => {
 	};
 
 	return () => {
-		return <Button onClick={() => addNetwork()}>Add network to wallet</Button>;
+		return (
+			<Button radius="xl" onClick={() => addNetwork()}>
+				Add network to wallet
+			</Button>
+		);
 	};
 };

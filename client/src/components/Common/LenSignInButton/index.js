@@ -1,66 +1,31 @@
-import { useState, useEffect } from "react";
-import { Button, Text } from "@mantine/core";
-import { authenticate, generateChallenge } from "lens/authentication/auth";
+import { Text, Grid, Button } from "@mantine/core";
+import React, { useEffect, useState } from "react";
+import { ConnectButton } from "web3uikit";
+import { useViewportSize } from "@mantine/hooks";
+import { generateChallenge } from "lens/authentication/auth";
 import { useMoralis } from "react-moralis";
-import { setAuthenticationToken } from "state";
-import { signMessage } from "helpers/signMessage";
+import { useSelector, useDispatch } from "react-redux";
+import LensSignInButton from "components/Common/LenSignInButton/LensSignInButton";
+/* 
+    Page shown to the user if the user is not authenticated.
+    Provides with an ability to be authenticated using various web3 service providers.
+	
+	*/
+const SignInButton = () => {
+	const { account, isAuthenticated, user } = useMoralis();
+	const state = useSelector(state => state.user);
+	const dispatch = useDispatch();
 
-// @Description: Button to sign in using with Lens Profile
-const LensSignInButton = () => {
-	// Get the account of current user using useMoralis hook
-	const { account, Moralis } = useMoralis();
-
-	// Set the error message to null
-	// This will be used to render the error message
-	// In the event of an error
-	const [error, setError] = useState(null);
-
-	// Set the signatures to an empty array
-	const [signatures, setSignatures] = useState([]);
-
-	// Function to handle the message signing
-	const handleSign = async e => {
-		// Prevent the default action
-		e.preventDefault();
-		// Use generateChallenge function to query the lens graphql api and generate a challenge
-		const request = await generateChallenge(account);
-		const challange = request.data.challenge.text;
-
-		// Sign the message using the signMessage function
-		// Pass the message and the setter function for the error
-		const { message, signature, address } = await signMessage({
-			setError,
-			message: challange,
-		});
-
-		// Add the signature to the signatures array
-		if (signature) {
-			setSignatures([...signatures, signature]);
-		}
-
-		// Use the authenticate function to verify the signature and receive access token and refresh token
-		const authTx = await authenticate(address, signature);
-
-		// Set the authentication token to the access token
-		setAuthenticationToken(await authTx.data.authenticate.accessToken);
-
-		// Save the authentication token and the refresh token in the local storage
-		localStorage.setItem("auth_token", authTx.data.authenticate.accessToken);
-		localStorage.setItem(
-			"refresh_token",
-			authTx.data.authenticate.refreshToken
+	// Return a grid consisting of three maximum size rows
+	if (!isAuthenticated) {
+		return (
+			<ConnectButton signingMessage="Welcome to parsedia" moralisAuth={true} />
 		);
-	};
-
-	return (
-		<>
-			<Text>
-				{/* Display error message */}
-				{error && error.message}
-			</Text>
-			<Button onClick={handleSign}>Sign in with Lens</Button>
-		</>
-	);
+	}
+	if (state.signedInWithLens) {
+		return <Text>Current user:{account}</Text>;
+	}
+	return <LensSignInButton />;
 };
 
-export default LensSignInButton;
+export default SignInButton;

@@ -7,24 +7,22 @@ import NavbarButton from "./NavbarButton";
 
 /* Navigation bar that is found on the left */
 const Navbar = () => {
-  return (
-    <NavbarMantine fixed={true} width={{ base: 220 }} p="xs">
+	return (
+		<NavbarMantine fixed={true} width={{ base: 320 }} p="xs">
+			{/* Holds links to other pages */}
+			<NavbarMantine.Section grow component={ScrollArea} mt="md">
+				{/* Map through Navigation elements and display them in NavbarComponentButton */}
+				{Navigation.map(item => (
+					<NavbarButton name={item.name} icon={item.icon} path={item.path} />
+				))}
+			</NavbarMantine.Section>
 
-      {/* Holds links to other pages */}
-      <NavbarMantine.Section grow component={ScrollArea} mt="md">
-
-        {/* Map through Navigation elements and display them in NavbarComponentButton */}
-        {Navigation.map((item) => (
-          <NavbarButton name={item.name} icon={item.icon} path={item.path} />
-        ))}
-      </NavbarMantine.Section>
-
-      {/* Holds link to user profile as well as a logout button*/}
-      <NavbarMantine.Section>
-        <NavbarFooter />
-      </NavbarMantine.Section>
-    </NavbarMantine>
-  );
+			{/* Holds link to user profile as well as a logout button*/}
+			<NavbarMantine.Section>
+				<NavbarFooter />
+			</NavbarMantine.Section>
+		</NavbarMantine>
+	);
 };
 
 export default Navbar;

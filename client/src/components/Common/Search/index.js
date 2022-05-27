@@ -3,7 +3,7 @@ import { Box, Button, TextInput } from "@mantine/core";
 import { FaSearch } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-const Search = () => {
+const Search = props => {
 	// State for the search input to empty string
 	const [input, setInput] = useState("");
 
@@ -11,15 +11,20 @@ const Search = () => {
 	const navigate = useNavigate();
 
 	return (
-		<Box sx={{ display: "flex", alignItems: "center" }}>
+		<Box sx={{ display: "flex", alignItems: "center", ...props.sx }}>
 			<TextInput
 				value={input}
 				onChange={event => setInput(event.currentTarget.value)}
-				sx={{ flex: 1 }}
 				placeholder="What are you looking for?"
 				icon={<FaSearch />}
 			/>
-			<Button onClick={() => navigate(`/Search/${input}`)}>Find</Button>
+			<Button
+				radius="md"
+				sx={{ marginLeft: "5px" }}
+				onClick={() => navigate(`/Search/${input}`)}
+			>
+				Find
+			</Button>
 		</Box>
 	);
 };

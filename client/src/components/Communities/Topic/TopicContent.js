@@ -18,3 +18,6 @@ const TopicContent = ({ topic = [] }) => {
 		);
 	}
 };
+
+export default TopicContent;
+;

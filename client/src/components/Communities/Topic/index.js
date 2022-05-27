@@ -2,8 +2,8 @@ import { useMantineTheme, Box, Text, Divider } from "@mantine/core";
 import { withCommunityTopic } from "components/Communities/Topic/withCommunityTopic";
 import { useParams } from "react-router-dom";
 import { AiFillHeart } from "react-icons/ai";
-import { RichTextEditorTopic } from "./ReplyForm";
-import { TopicContent } from "./TopicContent";
+import ReplyForm from "./ReplyForm";
+import TopicContent from "./TopicContent";
 
 // @Description: Topic page with topic, replies, and reply form
 const Topic = () => {
@@ -20,7 +20,7 @@ const Topic = () => {
 				{topic}
 			</Text>
 			<LoadedTopicContent />
-			<RichTextEditorTopic />
+			<ReplyForm />
 		</Box>
 	);
 };

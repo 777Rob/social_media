@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 import { MoonStars, Sun } from "tabler-icons-react";
 import "styling/App.css";
 import { GiHamburgerMenu } from "react-icons/gi";
+import LensSignInButton from "components/Common/LenSignInButton";
 
 // @Description: Header component for the app shell
 // @Props:
@@ -36,13 +37,14 @@ const Header = ({
 				<LogoText size="45px" />
 
 				{/* Page name */}
-				<Text sx={theme.headings.sizes.h1}>
+				{/* <Text sx={theme.headings.sizes.h1}>
 					{locationName[0] ? locationName[0].name : ""}
-				</Text>
+				</Text> */}
 
 				{/* Button to change the theme */}
 
 				<Group>
+					<LensSignInButton />
 					<ActionIcon
 						variant="default"
 						onClick={() => toggleColorScheme()}

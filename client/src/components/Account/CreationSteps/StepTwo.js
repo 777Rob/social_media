@@ -1,15 +1,14 @@
-import { Text, Stepper } from "@mantine/core";
-import { Input } from "web3uikit";
+import { List, Box, Divider, Text } from "@mantine/core";
+// import { BsStarFill } from "react-icons/bs";
 
-// In the second step we ask user to enter his username
+// @Desct
 const StepTwo = () => {
 	return (
 		<>
-			{" "}
-			<Text sx={{ fontWeight: "bold", fontSize: "18px", marginBottom: "20px" }}>
-				Select your user name:
+			<Text sx={{ fontWeight: "bold", fontSize: "30px" }}>
+				Advertising Profile Configuration
 			</Text>
-			<Input label="User name" name="User name" prefixIcon="cube" width="70%" />
+			<Divider />
 		</>
 	);
 };

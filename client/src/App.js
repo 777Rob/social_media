@@ -17,7 +17,6 @@ import SearchResults from "pages/SearchResults";
 import Latest from "components/Communities/Latest";
 import Header from "components/Navigation/Header";
 import RightSidebar from "components/Navigation/RightSidebar";
-import AccountCreation from "pages/AccountCreationPage";
 import Communities from "pages/Communities";
 import Community from "pages/Community";
 import CreateYourOwn from "pages/CreateYourOwn";
@@ -31,12 +30,14 @@ import Explore from "pages/Explore";
 import Topic from "components/Communities/Topic";
 import Navbar from "components/Navigation/Navbar";
 import Advertising from "pages/Advertising";
-import { useSeletor } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { LOAD_USER_DATA } from "redux/User";
 
 const App = () => {
 	const { isAuthenticated, user } = useMoralis();
+	const dispatch = useDispatch();
+	const userState = useSelector(state => state.user);
 	const locationObject = useLocation();
-	console.log(user);
 	// Set initial state for the color scheme to light
 	const [colorScheme, setColorScheme] = useState("light");
 
@@ -50,10 +51,10 @@ const App = () => {
 	// If the user is not authenticated, display the landing page
 
 	useEffect(() => {
-		if (!isAuthenticated && locationObject.pathname !== "/explore") {
-			// Page to be shown to the user that is not authenticated yet
-			navigate("/explore");
-		}
+		console.log(userState);
+		// if (userState.loaded) {
+		// 	dispatch(LOAD_USER_DATA(user));
+		// }
 	});
 	// If a user is authenticated already, but his/her profile is not completed yet,
 	// redirect to the AccountCreation page
@@ -63,6 +64,7 @@ const App = () => {
       return <AccountCreation />;
     }
     */
+
 	return (
 		// Color scheme provider used to change the color scheme of the app
 		<ColorSchemeProvider
@@ -118,16 +120,15 @@ const App = () => {
 					>
 						{/* Routes */}
 						<Routes>
-							<Route path="/" element={<Home />} />
+							<Route path="/" element={<Explore />} />
 							<Route path="/profile" element={<Profile />} />
 							<Route path="/profile/edit" element={<ProfileEdit />} />
 							<Route path="/settings" element={<Settings />} />
-							<Route path="/AccountCreation" element={<AccountCreation />} />
 							<Route path="/Rewards" element={<Rewards />} />
 							<Route path="/Communities" element={<Communities />} />
 							<Route path="/Advertising" element={<Advertising />} />
 							<Route path="/Search/:query" element={<SearchResults />} />
-							<Route path="/Explore" element={<Explore />} />
+							<Route path="/Feed" element={<Home />} />
 							<Route path="/Community/:address" element={<Community />}>
 								<Route path="categories" element={<Categories />} />
 								<Route path="topic/:topic" element={<Topic />} />

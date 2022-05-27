@@ -22,7 +22,7 @@ const SignInButton = () => {
 			<ConnectButton signingMessage="Welcome to parsedia" moralisAuth={true} />
 		);
 	}
-	if (state.signedInWithLens) {
+	if (state.signedInWithLens && isAuthenticated) {
 		return <Text>Current user:{account}</Text>;
 	}
 	return <LensSignInButton />;

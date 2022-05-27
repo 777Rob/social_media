@@ -1,32 +1,34 @@
-import { Text, Stepper } from "@mantine/core";
-import { Categories } from "data/Categories/categories";
-import { MultiSelect } from "@mantine/core";
+import { List, Box, Divider, Text } from "@mantine/core";
+// import { BsStarFill } from "react-icons/bs";
 
-// In this step ask user to select topics that user is interested
-// These categories will be used for advertising and ad rewards
-// as well as community recommendations
-
-const StepOne = ({ selectedCategories, setSelectedCategories }) => {
+// @Desct
+const StepOne = () => {
 	return (
 		<>
-			Select topic you are interested in. So we can show ads that are relavant
-			to you.
-			{/* Categories for selection are taken from Categories object */}
-			<MultiSelect
-				data={Categories.map((category, i) => ({
-					value: i,
-					label: (
-						<Text>
-							{category.icon}
-							{category.name}
-						</Text>
-					),
-				}))}
-				value={selectedCategories}
-				onChange={setSelectedCategories}
-				label="Pick categories you would like to follow:"
-				placeholder="Pick all that you like"
-			/>
+			<Text sx={{ fontWeight: "bold", fontSize: "30px" }}>
+				Advertising Profile
+			</Text>
+			<Divider />
+			<List>
+				<List.Item>
+					Advertising profile is an NFT that let's you earn while browsing.It
+					will keep track of your reward balances and will be used for showing
+					ads after seeing the ad. Reward is automatically added to the balance.{" "}
+				</List.Item>
+				<List.Item>
+					Some of the ads will contain tasks after completing them you can get
+					an extra reward.
+				</List.Item>
+				<List.Item>
+					ProfileNft has limited amount of ads that can be shown. The rate at
+					which limit updates depends on the reputation of the profile nft.
+				</List.Item>
+				<List.Item>
+					In the next steps you will configure advertiser profile and mint Ad
+					profile NFT. The more information you provide the more relevant
+					rewards you will see and higher reputation score will get.
+				</List.Item>
+			</List>
 		</>
 	);
 };

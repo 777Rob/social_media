@@ -122,6 +122,7 @@ const App = () => {
 						<Routes>
 							<Route path="/" element={<Explore />} />
 							<Route path="/profile" element={<Profile />} />
+							<Route path="/profile/:address" element={<Profile />} />
 							<Route path="/profile/edit" element={<ProfileEdit />} />
 							<Route path="/settings" element={<Settings />} />
 							<Route path="/Rewards" element={<Rewards />} />

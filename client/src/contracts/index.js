@@ -13,8 +13,8 @@ export const AD_PROFILE_ADDRESS = "0xFdC7CD9143d4176b9f6B7776cc97b27dB040408b";
 export const AD_CONTROL_ADDRESS = "0xB1e07c3c285eE39c9273794F472fBB5F2Ef18600";
 
 // Contract ABIs:
-export { PROFILE_CONTRACT_ABI } from "contracts/abi/PROFILE_CONTRACT_ABI";
-export { COMMUNITY_FACTORY_ABI } from "contracts/abi/COMMUNITY_FACTORY_ABI";
-export { USER_ATTENTION_TOKEN_ABI } from "contracts/abi/USER_ATTENTION_TOKEN_ABI";
-export { AD_PROFILE_ABI } from "contracts/abi/AD_PROFILE_ABI";
-export { AD_CONTROL_ABI } from "contracts/abi/AD_CONTROL_ABI";
+export { PROFILE_CONTRACT_ABI } from "contracts/ABI/PROFILE_CONTRACT_ABI";
+export { COMMUNITY_FACTORY_ABI } from "contracts/ABI/COMMUNITY_FACTORY_ABI";
+export { USER_ATTENTION_TOKEN_ABI } from "contracts/ABI/USER_ATTENTION_TOKEN_ABI";
+export { AD_PROFILE_ABI } from "contracts/ABI/AD_PROFILE_ABI";
+export { AD_CONTROL_ABI } from "contracts/ABI/AD_CONTROL_ABI";

@@ -1,4 +1,4 @@
-import { apolloClient } from 'apolloClient';
+import client from 'client';
 import { gql } from '@apollo/client'
 
 const SEARCH = `
@@ -272,7 +272,7 @@ fragment CommentMirrorOfFields on Comment {
 
 
 export const search = (request) => {
-  return apolloClient.query({
+  return client.query({
     query: gql(SEARCH),
     variables: {
       request

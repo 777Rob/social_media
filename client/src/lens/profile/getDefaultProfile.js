@@ -1,7 +1,6 @@
 import { gql } from "@apollo/client/core";
-import { apolloClient } from "apolloClient";
+import client from "client";
 import { prettyJSON } from "helpers/helpers";
-import { GET_PROFILE } from "./profile";
 
 const GET_DEFAULT_PROFILE = `
 query DefaultProfile($address: EthereumAddress!) {
@@ -92,11 +91,10 @@ query DefaultProfile($address: EthereumAddress!) {
 // Function for getting the default profile of a user
 // @Param: address - Ethereum address to get default profile for
 // returns a promise that resolves to the default profile
-export const getDefaultProfile = (address) => {
-  return apolloClient.query({
-    query: gql(GET_PROFILE),
-    variables: {
-      address: address
-    }
-  });
+export const getDefaultProfile = address => {
+	console.log(address);
+	return client.query({
+		query: gql(GET_DEFAULT_PROFILE),
+		variables: address,
+	});
 };

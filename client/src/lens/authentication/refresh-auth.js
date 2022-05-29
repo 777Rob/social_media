@@ -1,7 +1,7 @@
-import { apolloClient } from 'apolloClient';
+import client from 'client';
 import { gql } from '@apollo/client'
 
-// Following functions use apolloClient to make graphql queries and mutations directly to the server
+// Following functions use client to make graphql queries and mutations directly to the server
 
 
 const REFRESH_AUTHENTICATION = `
@@ -16,7 +16,7 @@ const REFRESH_AUTHENTICATION = `
 // Refresh authentication function to refresh the authentication token
 // @Param refreshToken: refresh token of the user
 export const refreshAuth = (refreshToken) => {
-  return apolloClient.mutate({
+  return client.mutate({
     mutation: gql(REFRESH_AUTHENTICATION),
     variables: {
       request: {

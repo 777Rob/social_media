@@ -1,23 +1,48 @@
 import { useMoralis } from "react-moralis";
-import { Box, Text, Button, Image } from "@mantine/core";
+import { Box, Text, Button, Image, LoadingOverlay, Center } from "@mantine/core";
 import {useParams} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { CopyButton } from "web3uikit";
 import Avatar from "components/Common/Avatar";
 import { useEffect, useState } from "react";
 import NoBannerImage from "data/Images/nobanner.jpg"
-
+import {getDefaultProfile} from "lens/profile/getDefaultProfile"
+import _ from "lodash"
 
 //@Description: Profile page is used to display the user's profile
-const Profile = () => {
+const ProfileLoaded = () => {
   const { Moralis, account } = useMoralis();
   const profileAddress = useParams();
   // Get current user 
   const user = Moralis.User.current();
-
+  const [loading, setLoading] = useState(true)
+  const [profile,setProfile] = useState([])
   // Get navigate function from react-router-dom to navigate to other pages
   const navigate = useNavigate();
 
+  useEffect(() => {
+    (async () => {
+      const result = await getDefaultProfile(profileAddress)
+      console.log(result)
+      setProfile(result.data.defaultProfile)
+      setLoading(false)
+    })()
+  }, [profileAddress])
+
+  if (loading){
+    return <LoadingOverlay visible={true}/>
+  }
+
+  const formatedStats = _.toPairs(profile?.stats).map(item => {
+		return [
+			item[0]
+				.split(/(?=[A-Z])/)
+				.map(word => word.charAt(0).toUpperCase() + word.slice(1))
+				.join(" "),
+			item[1],
+		];
+	});
+  console.log(formatedStats)
   return (
     <Box>
       <Box
@@ -32,8 +57,8 @@ const Profile = () => {
         <Image
           radius="sm"
           src={
-            user.attributes.banner
-              ? user.attributes.banner
+            profile?.coverPicture
+              ? profile?.coverPicture.original.url
               : NoBannerImage
           }
           sx={{ marginTop: 10, marginBottom: 20 }}
@@ -44,18 +69,31 @@ const Profile = () => {
         />
 
         {/* Avatar */}
-        <Avatar src={user.attributes.profileImage} />
+        <Avatar src={profile?.picture.original.url || ""} />
 
         {/* Username */}
-        <Text>{user.attributes.userName}</Text>
+        <Text>{profile?.name}</Text>
 
         {/* Wallet with copy button */}
         <Text>
           {account}
           <CopyButton text={account} revertIn={6500} />
         </Text>
-        <Text>{user.attributes.bio}</Text>
+        <Text>{profile?.bio}</Text>
 
+        {/* Attributes */}
+        {profile?.attributes.map(attribute => <Text>
+          {attribute.traitType || ""}: {attribute.value || ""}
+        </Text>)}
+        {/* Stats */}
+        <Box sx={{display: "flex", gap: "15px"}}>
+          {formatedStats.slice(0, formatedStats.length-1).map(stat => <Text>
+            <b>
+            {stat[0]}
+              </b>
+              :{stat[1]}
+          </Text>)}
+        </Box>
         {/* Navigate to profile edit page */}
         <Button
           radius="md"
@@ -78,4 +116,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileLoaded;

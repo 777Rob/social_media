@@ -1,4 +1,4 @@
-import { apolloClient } from "./apollo-client";
+import { client } from "./apollo-client";
 import { gql } from "@apollo/client";
 
 const CREATE_SET_DISPATCHER_TYPED_DATA = `
@@ -31,7 +31,7 @@ const CREATE_SET_DISPATCHER_TYPED_DATA = `
 `;
 
 export const enableDispatcherWithTypedData = (profileId, dispatcher) => {
-	return apolloClient.mutate({
+	return client.mutate({
 		mutation: gql(CREATE_SET_DISPATCHER_TYPED_DATA),
 		variables: {
 			request: {
@@ -43,7 +43,7 @@ export const enableDispatcherWithTypedData = (profileId, dispatcher) => {
 };
 
 export const disableDispatcherWithTypedData = profileId => {
-	return apolloClient.mutate({
+	return client.mutate({
 		mutation: gql(CREATE_SET_DISPATCHER_TYPED_DATA),
 		variables: {
 			request: {

@@ -1,4 +1,4 @@
-import { apolloClient } from 'apolloClient';
+import client from 'client';
 // this is showing you how you use it with react for example
 // if your using node or something else you can import using
 // @apollo/client/core!
@@ -44,7 +44,7 @@ const RECOMMENDED_PROFILES = `
 // Function to get recommended profiles from the server
 // Returns a promise that resolves to an array of profiles
 export const getRecommendedProfiles = () => {
-  return apolloClient.query({
+  return client.query({
     query: gql(RECOMMENDED_PROFILES),
   })
 }

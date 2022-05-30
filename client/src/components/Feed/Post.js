@@ -28,7 +28,7 @@ console.log(post)
 			<Grid.Col className="post--first--row">
 				<Avatar userId={post.attributes.User} />
 				<Text size="md" className="post--author">
-					Anonymous
+					{/* {post.attributes.userName || "Username"} */}
 				</Text>
 				{/* Date when the post was created */}
 				<Text size="sm" color="Gray">

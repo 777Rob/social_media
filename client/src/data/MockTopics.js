@@ -4,8 +4,8 @@ import { useMoralis } from "react-moralis";
 export const MockTopics = [
   {
     topic: "Some topic about our amazing NFT Collection",
-    replyCount: 420,
-    viewCount: 69,
+    replyCount: 0,
+    viewCount: 0,
     lastActivity: "14h",
     users: [
       { avatar: defaultImages[0] },
@@ -15,8 +15,8 @@ export const MockTopics = [
   },
   {
     topic: "Amazing topic nr2",
-    replyCount: 420,
-    viewCount: 69,
+    replyCount: 0,
+    viewCount: 0,
     lastActivity: "14h",
     users: [
       { avatar: defaultImages[0] },
@@ -26,8 +26,8 @@ export const MockTopics = [
   },
   {
     topic: "Some topic about our amazing NFT Collection",
-    replyCount: 420,
-    viewCount: 69,
+    replyCount: 0,
+    viewCount: 0,
     lastActivity: "14h",
     users: [
       { avatar: defaultImages[0] },
@@ -37,8 +37,8 @@ export const MockTopics = [
   },
   {
     topic: "Amazing topic nr2",
-    replyCount: 420,
-    viewCount: 69,
+    replyCount: 0,
+    viewCount: 0,
     lastActivity: "14h",
     users: [
       { avatar: defaultImages[0] },
@@ -57,7 +57,7 @@ export const MockTopicPostsFull = [
     date: "21 May",
     text: "Nicee i can post !!!! ",
     likes: 6,
-    views: 420,
+    views: 0,
   },
   {
     user: {

@@ -68,9 +68,7 @@ const NavbarFooter = () => {
 						{isAuthenticated && (
 							<Box sx={{ flex: 1, flexDirection: "row" }}>
 								<Text size="sm" weight={500}>
-									{user.attributes.userName
-										? user.attributes.userName
-										: "Anonymous"}
+									{"Username"}
 									<Text
 										color="dimmed"
 										sx={{ width: "150px", fontSize: "10px", overflow: "clip" }}

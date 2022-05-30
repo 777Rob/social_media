@@ -31,6 +31,6 @@ export const withCommunityTopics = (Component, params) => {
 			})();
 		});
 		// Return a component
-		return <Component {...props} topics={topics} />;
+		return <Component {...props} topics={[]} />;
 	};
 };

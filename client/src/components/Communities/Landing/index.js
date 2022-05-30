@@ -1,23 +1,20 @@
 import { Text, Box, Divider, Table, Tabs } from "@mantine/core";
-import DisplayTopics from "./DisplayTopics";
-import CategoriesPage from "./CategoriesPage";
+import DisplayTopics from "../DisplayTopics";
+import Categories from "../Categories";
 import { withCommunityTopics } from "components/Communities/Topic/withCommunityTopics";
-import CommunitiesFeed from "./CommunitiesFeed";
+import CommunitiesFeed from "../CommunitiesFeed";
 
 const CommunityLanding = () => {
 	// Pass the display topics component to the withCommunityTopics HOC with GET_LATEST_TOPICS as the query
-	const LatestTopicsPageLoaded = withCommunityTopics(DisplayTopics, {
-		query: "GET_LATEST_TOPICS",
-	});
 
 	return (
 		<Text>
 			<Tabs grow position="center" variant="outline">
 				<Tabs.Tab label="Latest">
-					<LatestTopicsPageLoaded />
+					<DisplayTopics />
 				</Tabs.Tab>
 				<Tabs.Tab label="Categories">
-					<CategoriesPage />
+					<Categories />
 				</Tabs.Tab>
 				<Tabs.Tab label="Feed">
 					<CommunitiesFeed />

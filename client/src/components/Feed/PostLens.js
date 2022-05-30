@@ -1,6 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { Text, Grid, ActionIcon, Group, Divider, Menu } from "@mantine/core";
-import Avatar from "components/Common/Avatar";
+import {Image, Text, Grid, ActionIcon, Group, Divider, Menu ,Avatar} from "@mantine/core";
 import "../../styling/post-styling.css";
 import { MessageCircle, Share, Star, Dots, Report } from "tabler-icons-react";
 import React, { useState } from "react";
@@ -10,13 +9,14 @@ import { timeSince } from "helpers/time-calculator";
 
 const Post = ({ post }) => {
 	const navigate = useNavigate();
-
+	
+console.log(post)
 	// The default state is retrieved from the database which denotes whether the post is liked by the user or not
 	// For now it is false
 	const [isLiked, setLiked] = useState(false);
-	const likes = 400;
-	const shares = 0;
-	const comments = 17;
+	const collects = post.stats.totalAmountOfCollects;
+	const mirrors = post.stats.totalAmountOfMirrors;
+	const comments = post.stats.totalAmountOfComments;
 
 	function toggle() {
 		setLiked(prevState => !prevState);
@@ -27,8 +27,14 @@ const Post = ({ post }) => {
 			{/* First row is of size 12 (the maximum is 12) and consists of the user's avatar and username */}
 			<Grid.Col className="post--first--row">
 				{/* <Avatar userId={post.profile.original.url} /> */}
-				<Text size="md" className="post--author">
-					Anonymous
+				<Avatar
+					size="md"
+					onClick={() => navigate(`/Profile/${post.profile.ownedBy}`)}
+					radius="xl"
+					src={post.profile.picture?.original.url || ""}
+					sx={{ marginRight: "10px" }}
+				/>				<Text size="md" className="post--author">
+					{post.profile.name || ""}
 				</Text>
 				{/* Date when the post was created */}
 				<Text size="sm" color="Gray">
@@ -38,6 +44,7 @@ const Post = ({ post }) => {
 
 			{/* Second row contains post text */}
 			<Grid.Col span={12} className="post--content">
+				{post.metadata?.media && <Image onClick={() => console.log(post.metadata?.media)} src={post.metadata?.media[0]} />}
 				<Text size="md">{post.metadata?.name || ""}</Text>
 				<Text size="md">{post.metadata?.content || ""}</Text>
 			</Grid.Col>
@@ -53,12 +60,12 @@ const Post = ({ post }) => {
 					/>
 					<PostButton
 						color={"green"}
-						amount={shares}
+						amount={mirrors}
 						icon={<Share size={16} />}
 					/>
 					<PostButton
 						color={"yellow"}
-						amount={likes}
+						amount={collects}
 						icon={
 							<Star
 								size={16}

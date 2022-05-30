@@ -1,4 +1,4 @@
-import { apolloClient } from './apollo-client';
+import { client } from './apollo-client';
 // this is showing you how you use it with react for example
 // if your using node or something else you can import using
 // @apollo/client/core!
@@ -349,7 +349,7 @@ const GET_TIMELINE = `
 // The timeline queries will continue to get smarter, eventually bringing in AI and data profiling. 
 // returns a promise that resolves to an array of posts, comments, and mirrors
 export const getTimeline = (profileId) => {
-  return apolloClient.query({
+  return client.query({
     query: gql(GET_TIMELINE),
     variables: {
       request: {

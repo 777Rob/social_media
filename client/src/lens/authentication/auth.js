@@ -1,7 +1,6 @@
-import { apolloClient } from "apolloClient";
-import { gql } from "@apollo/client";
+import client  from "client";import { gql } from "@apollo/client";
 
-// Following functions use apolloClient to make graphql queries and mutations to the server
+// Following functions use client to make graphql queries and mutations to the server
 
 const AUTHENTICATION = `
   mutation($request: SignedAuthChallenge!) { 
@@ -15,7 +14,7 @@ const AUTHENTICATION = `
 // @Param address: address of the user to authenticate
 // @Param signature: by the user signed challange 
 export const authenticate = (address, signature) => {
-  return apolloClient.mutate({
+  return client.mutate({
     mutation: gql(AUTHENTICATION),
     variables: {
       request: {
@@ -35,7 +34,7 @@ const GET_CHALLENGE = `
 // Generate challenge function to generate a challenge
 // @Param address: address of the user to generate challenge for
 export const generateChallenge = (address) => {
-  const challange = apolloClient.query({
+  const challange = client.query({
     query: gql(GET_CHALLENGE),
     variables: {
       request: {

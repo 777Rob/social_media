@@ -1,15 +1,18 @@
 import { useMoralis } from "react-moralis";
 import { Box, Text, Button, Image } from "@mantine/core";
+import {useParams} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { CopyButton } from "web3uikit";
 import Avatar from "components/Common/Avatar";
 import { useEffect, useState } from "react";
+import NoBannerImage from "data/Images/nobanner.jpg"
+
 
 //@Description: Profile page is used to display the user's profile
 const Profile = () => {
   const { Moralis, account } = useMoralis();
-
-  // Get current user
+  const profileAddress = useParams();
+  // Get current user 
   const user = Moralis.User.current();
 
   // Get navigate function from react-router-dom to navigate to other pages
@@ -31,7 +34,7 @@ const Profile = () => {
           src={
             user.attributes.banner
               ? user.attributes.banner
-              : "https://www.developingngo.org/wp-content/uploads/2018/01/2560x1440-gray-solid-color-background.jpg"
+              : NoBannerImage
           }
           sx={{ marginTop: 10, marginBottom: 20 }}
           width={1200}

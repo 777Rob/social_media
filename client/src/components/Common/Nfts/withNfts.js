@@ -18,15 +18,15 @@ export const withNfts = (Component, address) => {
 		useEffect(() => {
 			// Function to fetch NFTS
 			(async () => {
-				// Get NFTS using web3 api
-				const polygonNFTs = await Web3Api.account.getNFTs({
-					// Chain
-					chain: "mumbai",
-					// Address of an user whose nfts to fetch
-					address: address,
-				});
-				// Set nfts to the result
-				setNfts(polygonNFTs.result);
+				// // Get NFTS using web3 api
+				// const polygonNFTs = await Web3Api.account.getNFTs({
+				// 	// Chain
+				// 	chain: "mumbai",
+				// 	// Address of an user whose nfts to fetch
+				// 	address: address,
+				// });
+				// // Set nfts to the result
+				// setNfts(polygonNFTs.result);
 			})();
 		});
 		// Return a component

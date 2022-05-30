@@ -36,6 +36,10 @@ contract CustomCommunity is ERC721, Ownable {
     _safeMint(to, tokenId);
   }
 
+  function withdraw() public onlyOwner {
+    payable(owner).transfer{value: this.balance}();
+  }
+
   function mint() public payable {
     require(msg.value >= price, "CUSTOM_COMMUNITY: NOT_ENOUGH");
     uint256 tokenId = _tokenIdCounter.current();

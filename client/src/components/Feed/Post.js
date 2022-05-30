@@ -10,7 +10,7 @@ import { timeSince } from "helpers/time-calculator";
 
 const Post = ({ post }) => {
 	const navigate = useNavigate();
-
+console.log(post)
 	// The default state is retrieved from the database which denotes whether the post is liked by the user or not
 	// For now it is false
 	const [isLiked, setLiked] = useState(false);
@@ -28,7 +28,7 @@ const Post = ({ post }) => {
 			<Grid.Col className="post--first--row">
 				<Avatar userId={post.attributes.User} />
 				<Text size="md" className="post--author">
-					Anonymous
+					{/* {post.attributes.userName || "Username"} */}
 				</Text>
 				{/* Date when the post was created */}
 				<Text size="sm" color="Gray">

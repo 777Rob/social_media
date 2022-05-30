@@ -71,8 +71,10 @@ const authLink = new ApolloLink((operation, forward) => {
 });
 
 // Create the apollo client instance
-export const apolloClient = new ApolloClient({
+const client = new ApolloClient({
 	link: from([errorLink, authLink, httpLink]),
 	cache: new InMemoryCache(),
 	defaultOptions: defaultOptions,
 });
+
+export default client;

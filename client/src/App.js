@@ -23,6 +23,7 @@ import CreateYourOwn from "pages/CreateYourOwn";
 import Home from "pages/Home";
 import LenSignInButton from "components/Common/LenSignInButton";
 import Profile from "pages/Account/Profile";
+import ProfileLoaded from "pages/Account/ProfileLoaded";
 import ProfileEdit from "pages/Account/ProfileEdit";
 import Rewards from "pages/Rewards";
 import Settings from "pages/Account/Settings";
@@ -47,23 +48,12 @@ const App = () => {
 
 	// Set initial state for the displayRightSidebar to true
 	const [displayRightSideBar, setDisplayRightSidebar] = useState(true);
-	const navigate = useNavigate();
 	// If the user is not authenticated, display the landing page
 
 	useEffect(() => {
 		console.log(userState);
-		// if (userState.loaded) {
-		// 	dispatch(LOAD_USER_DATA(user));
-		// }
-	});
-	// If a user is authenticated already, but his/her profile is not completed yet,
-	// redirect to the AccountCreation page
 
-	/*
-    if (!user.attributes.profileCompleted) {
-      return <AccountCreation />;
-    }
-    */
+	});
 
 	return (
 		// Color scheme provider used to change the color scheme of the app
@@ -122,7 +112,7 @@ const App = () => {
 						<Routes>
 							<Route path="/" element={<Explore />} />
 							<Route path="/profile" element={<Profile />} />
-							<Route path="/profile/:address" element={<Profile />} />
+							<Route path="/profile/:address" element={<ProfileLoaded />} />
 							<Route path="/profile/edit" element={<ProfileEdit />} />
 							<Route path="/settings" element={<Settings />} />
 							<Route path="/Rewards" element={<Rewards />} />

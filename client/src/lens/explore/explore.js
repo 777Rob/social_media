@@ -1,9 +1,9 @@
 
 import { gql } from '@apollo/client/core';
-import { apolloClient } from 'apolloClient';
+import client from 'client';
 import { prettyJSON } from 'helpers/helpers';
 
-// Following functions use apolloClient to make graphql queries and mutations to the server
+// Following functions use client to make graphql queries and mutations to the server
 
 const EXPLORE_PUBLICATIONS = `
   query($request: ExplorePublicationRequest!) {
@@ -326,7 +326,7 @@ const EXPLORE_PUBLICATIONS = `
 // offset: number;
 
 export const explorePublications = (explorePublicationQueryRequest) => {
-  return apolloClient.query({
+  return client.query({
     query: gql(EXPLORE_PUBLICATIONS),
     variables: {
       request: explorePublicationQueryRequest,

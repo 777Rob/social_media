@@ -12,6 +12,7 @@ import _ from "lodash";
 import CreateYourOwn from "data/CreateYourOwn.jpg";
 import NftCard from "components/Common/Nfts/NftCard";
 import { useNavigate } from "react-router-dom";
+import {HiViewGridAdd} from "react-icons/hi";
 
 export const UserNfts = ({ nfts }) => {
 	const theme = useMantineTheme();
@@ -26,7 +27,8 @@ export const UserNfts = ({ nfts }) => {
 				<div style={{ margin: "auto" }}>
 					<Card shadow="sm" p="lg">
 						<Card.Section>
-							<Image src={CreateYourOwn} height={320} alt="rad" />
+							{/* <Image src={CreateYourOwn} height={320} alt="rad" /> */}
+							<HiViewGridAdd size={230}/>
 						</Card.Section>
 
 						<Group

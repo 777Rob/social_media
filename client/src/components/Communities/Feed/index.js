@@ -5,12 +5,10 @@ import { withPosts } from "components/Feed/withPosts";
 
 const Index = () => {
 	// Load feed using the withPosts HOC and pass the Feed component as the component to load
-	const PostsLoaded = withPosts(Feed);
 
 	return (
 		<Box>
 			<WritePost />
-			<PostsLoaded />
 		</Box>
 	);
 };
